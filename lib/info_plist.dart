@@ -33,6 +33,7 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookAppID')]));
     dict().children.add(facebookAppIDElement);
   } else {
+    dict().children.removeAt(dict().children.indexOf(facebookAppIDKey) + 1);
     dict().children[dict().children.indexOf(facebookAppIDKey) + 1] = facebookAppIDElement;
   }
 
@@ -42,6 +43,7 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookDisplayName')]));
     dict().children.add(facebookDisplayNameElement);
   } else {
+    dict().children.removeAt(dict().children.indexOf(facebookDisplayNameKey) + 1);
     dict().children[dict().children.indexOf(facebookDisplayNameKey) + 1] = facebookDisplayNameElement;
   }
 
@@ -56,7 +58,8 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('LSApplicationQueriesSchemes')]));
     dict().children.add(lSApplicationQueriesSchemesElement);
   } else {
-    dict().children[dict().children.indexOf(facebookDisplayNameKey) + 1] = lSApplicationQueriesSchemesElement;
+    dict().children.removeAt(dict().children.indexOf(lSApplicationQueriesSchemesKey) + 1);
+    dict().children[dict().children.indexOf(lSApplicationQueriesSchemesKey) + 1] = lSApplicationQueriesSchemesElement;
   }
 
   final cFBundleURLTypesElement = XmlElement(XmlName('array'), [], [
@@ -80,7 +83,8 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('CFBundleURLTypes')]));
     dict().children.add(cFBundleURLTypesElement);
   } else {
-    dict().children[dict().children.indexOf(facebookDisplayNameKey) + 1] = cFBundleURLTypesElement;
+    dict().children.removeAt(dict().children.indexOf(cFBundleURLTypesKey) + 1);
+    dict().children[dict().children.indexOf(cFBundleURLTypesKey) + 1] = cFBundleURLTypesElement;
   }
 
   final String newContent = xml.toXmlString(pretty: true);
