@@ -13,8 +13,9 @@ import 'google_services_plist.dart';
 import 'info_plist.dart';
 import 'utils.dart';
 
-Future<void> init() async {
-  print('V.1.0.1');
+Future<void> init({
+  bool addToGit = false,
+}) async {
 
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig);
@@ -89,7 +90,9 @@ Future<void> init() async {
     name,
   ].join(' && '));
 
-  await commentGitIgnore();
-  await shell.run(gitAdd);
-  await commentGitIgnore(reverse: true);
+  if (addToGit) {
+    await commentGitIgnore();
+    await shell.run(gitAdd);
+    await commentGitIgnore(reverse: true);
+  }
 }

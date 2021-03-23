@@ -108,6 +108,7 @@ dependencies:
   flutter_tts: ^2.0.0
   html_unescape: ^1.0.2
   flutter_highlight: ^0.6.0
+  webview_flutter: ^1.0.7
 
 dependency_overrides:
   flutter_svg: ^0.18.0
