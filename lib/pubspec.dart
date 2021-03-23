@@ -125,7 +125,8 @@ dev_dependencies:
   rename: ^1.2.0
   change_app_package_name: ^0.1.2
   config_reader:
-    path: C:\Users\eldee\AndroidStudioProjects\config_reader
+    git:
+      url: https://github.com/ourcoteam/config_reader
   custom_flutter_launcher_name:
     git:
       url: https://github.com/ourcoteam/custom_flutter_launcher_name
