@@ -14,6 +14,8 @@ import 'info_plist.dart';
 import 'utils.dart';
 
 Future<void> init() async {
+  print('V.1.0.0');
+
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig);
 
