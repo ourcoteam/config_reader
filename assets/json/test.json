@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "socialLogin": {
+      "facebook": {
+        "id": "FACEBOOK_APP_ID",
+        "name": "FACEBOOK_APP_NAME"
+      }
+    },
+    "app": {
+      "appName": "APP_NAME",
+      "appIcon": "APP_ICON ex: https://2code.info/../..."
+    },
+    "splash": {
+      "color": "SPLASH_COLOR",
+      "image": "SPLASH_IMAGE ex: https://2code.info/../..."
+    }
+  }
+}

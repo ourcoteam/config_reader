@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:xml/xml.dart';
 
 Future<void> infoPlist({
-  String name,
-  String adMobId,
   String facebookName,
   String facebookId,
   String reversedClientId,
@@ -20,14 +18,14 @@ Future<void> infoPlist({
   XmlElement plist() => xml.getElement('plist');
   XmlElement dict() => plist().getElement('dict');
 
-  final gADApplicationIdentifierElement = XmlElement(XmlName('string'), [], [XmlText(adMobId)]);
-  final gADApplicationIdentifierKey = dict().children.firstWhere((e) => e.text == 'GADApplicationIdentifier', orElse: () => null);
-  if (gADApplicationIdentifierKey == null) {
-    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('GADApplicationIdentifier')]));
-    dict().children.add(gADApplicationIdentifierElement);
-  } else {
-    dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
-  }
+  // final gADApplicationIdentifierElement = XmlElement(XmlName('string'), [], [XmlText(adMobId)]);
+  // final gADApplicationIdentifierKey = dict().children.firstWhere((e) => e.text == 'GADApplicationIdentifier', orElse: () => null);
+  // if (gADApplicationIdentifierKey == null) {
+  //   dict().children.add(XmlElement(XmlName('key'), [], [XmlText('GADApplicationIdentifier')]));
+  //   dict().children.add(gADApplicationIdentifierElement);
+  // } else {
+  //   dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
+  // }
 
   final facebookAppIDElement = XmlElement(XmlName('string'), [], [XmlText(facebookId)]);
   final facebookAppIDKey = dict().children.firstWhere((e) => e.text == 'FacebookAppID', orElse: () => null);

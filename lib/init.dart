@@ -17,20 +17,20 @@ Future<void> init() async {
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig);
 
-  final facebookId = config.getMap('socialLogin')?.getMap('facebook')?.get('id') ?? 'FACE_ID';
-  final facebookName = config.getMap('socialLogin')?.getMap('facebook')?.get('name') ?? 'FACE_NAME';
-  final appName = config.getMap('app')?.get('appName') ?? staticConfig.get('appName');
+  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id') ?? 'FACE_ID';
+  final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name') ?? 'FACE_NAME';
+  final appName = config.getMap('meta')?.getMap('app')?.get('appName') ?? staticConfig.get('appName');
   final appBundleAndroid = staticConfig.get('appIdAndroid');
   // final appBundleIOS = staticConfig.get('appIdIOS');
-  final baseUrl = config.get('baseUrl') ?? staticConfig.get('serviceUrl') ?? staticConfig.get('baseUrl');
+  final baseUrl = config.getMap('meta')?.get('baseUrl') ?? staticConfig.get('serviceUrl') ?? staticConfig.get('baseUrl');
 
-  final adMobIdAndroid = config.getMap('adMob')?.get('androidID') ?? 'GAD_Android';
-  final adMobIdIOS = config.getMap('adMob')?.get('IosID') ?? 'GAD_IOS';
+  // final adMobIdAndroid = config.getMap('meta')?.getMap('adMob')?.get('androidID') ?? 'GAD_Android';
+  // final adMobIdIOS = config.getMap('meta')?.getMap('adMob')?.get('IosID') ?? 'GAD_IOS';
 
-  final splashColor = config.getMap('splash')?.get('color') ?? '';
-  final splashUrl = config.getMap('splash')?.get('image') ?? '';
+  final splashColor = config.getMap('meta')?.getMap('splash')?.get('color');
+  final splashUrl = config.getMap('meta')?.getMap('splash')?.get('image');
 
-  final iconUrl = config.getMap('app')?.get('appIcon') ?? '';
+  final iconUrl = config.getMap('meta')?.getMap('app')?.get('appIcon');
 
   await downloadImages(
     splashUrl: splashUrl,
@@ -47,14 +47,11 @@ Future<void> init() async {
 
   await androidManifest(
     bundle: appBundleAndroid,
+    baseUrl: baseUrl,
     name: appName,
-    adMobId: adMobIdAndroid,
-    siteUrl: baseUrl,
   );
 
   await infoPlist(
-    name: appName,
-    adMobId: adMobIdIOS,
     facebookId: facebookId,
     facebookName: facebookName,
     reversedClientId: await getReversedClientId(),

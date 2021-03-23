@@ -1,8 +1,10 @@
 import 'dart:io';
 
-Future flutterLauncherName(String name)async{
+Future flutterLauncherName(String name) async {
+  if (name == null) return;
+
   final file = File('custom_flutter_launcher_name.yaml');
-  if(file.existsSync()){
+  if (file.existsSync()) {
     file.deleteSync();
   }
   file.createSync();

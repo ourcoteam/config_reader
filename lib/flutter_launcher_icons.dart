@@ -1,8 +1,8 @@
 import 'dart:io';
 
-Future flutterLauncherIcons()async{
+Future flutterLauncherIcons() async {
   final file = File('flutter_launcher_icons.yaml');
-  if(file.existsSync()){
+  if (file.existsSync()) {
     file.deleteSync();
   }
   file.createSync();

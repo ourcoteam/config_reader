@@ -7,8 +7,8 @@ Future<void> downloadImages({
   String iconUrl,
 }) async {
   await Future.wait([
-    if (splashUrl.isNotEmpty) downloadSplash(splashUrl),
-    if (iconUrl.isNotEmpty) downloadIcon(iconUrl),
+    if (splashUrl != null) downloadSplash(splashUrl),
+    if (iconUrl != null) downloadIcon(iconUrl),
   ]);
 }
 
