@@ -5,6 +5,7 @@ import 'package:config_reader/version.dart';
 import 'package:process_run/shell_run.dart';
 
 import 'android_manifest.dart';
+import 'app_file.dart';
 import 'config_reader.dart';
 import 'download_images.dart';
 import 'flutter_launcher_icons.dart';
@@ -64,6 +65,8 @@ Future<void> init({
   // await changePackageName(staticConfig['appIdAndroid']);
   // await debugAndroidManifest(staticConfig['appIdAndroid']);
   // await profileAndroidManifest(staticConfig['appIdAndroid']);
+
+  await appFile(appBundleAndroid);
 
   await tempJson(
     authKey: authKey,
