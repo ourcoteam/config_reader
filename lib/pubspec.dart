@@ -1,14 +1,15 @@
 import 'dart:io';
 
-Future<void> changePubspec() async {
+Future<void> changePubspec({String version}) async {
   final file = File('pubspec.yaml');
-  file.writeAsStringSync(r'''
+  final lastAndroidVersionString = file.readAsLinesSync().firstWhere((element) => element.contains('version:'));
+  file.writeAsStringSync('''
 name: news
 description: A new Flutter project.
 
 # publish_to: "none"
 
-version: 1.0.102+103
+${version!=null?"version: $version":lastAndroidVersionString}
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -155,5 +156,5 @@ flutter:
           weight: 500
         - asset: assets/fonts/SFProDisplay-Semibold.otf
           weight: 600
-  ''');
+''');
 }

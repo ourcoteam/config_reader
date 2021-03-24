@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:xml/xml.dart';
 
 Future<void> infoPlist({
+  String version,
+  String bundle,
   String facebookName,
   String facebookId,
   String reversedClientId,
@@ -26,6 +28,28 @@ Future<void> infoPlist({
   // } else {
   //   dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
   // }
+
+  if (version != null) {
+    final cfBundleShortVersionStringElement = XmlElement(XmlName('string'), [], [XmlText(version)]);
+    final cfBundleShortVersionStringKey = dict().children.firstWhere((e) => e.text == 'CFBundleShortVersionString', orElse: () => null);
+    if (cfBundleShortVersionStringKey == null) {
+      dict().children.add(XmlElement(XmlName('key'), [], [XmlText('CFBundleShortVersionString')]));
+      dict().children.add(cfBundleShortVersionStringElement);
+    } else {
+      dict().children.removeAt(dict().children.indexOf(cfBundleShortVersionStringKey) + 1);
+      dict().children[dict().children.indexOf(cfBundleShortVersionStringKey) + 1] = cfBundleShortVersionStringElement;
+    }
+  }
+
+  final cFBundleIdentifierElement = XmlElement(XmlName('string'), [], [XmlText(bundle)]);
+  final cFBundleIdentifierKey = dict().children.firstWhere((e) => e.text == 'CFBundleIdentifier', orElse: () => null);
+  if (cFBundleIdentifierKey == null) {
+    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('CFBundleIdentifier')]));
+    dict().children.add(cFBundleIdentifierElement);
+  } else {
+    dict().children.removeAt(dict().children.indexOf(cFBundleIdentifierKey) + 1);
+    dict().children[dict().children.indexOf(cFBundleIdentifierKey) + 1] = cFBundleIdentifierElement;
+  }
 
   final facebookAppIDElement = XmlElement(XmlName('string'), [], [XmlText(facebookId)]);
   final facebookAppIDKey = dict().children.firstWhere((e) => e.text == 'FacebookAppID', orElse: () => null);
