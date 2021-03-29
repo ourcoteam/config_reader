@@ -1,7 +1,7 @@
 import 'package:config_reader/init.dart';
 
 void main(List<String> args) {
-  print('v.1.0.5');
+  print('v.1.0.6');
 
   init(
     addToGit: !args.any((e) => e == '--no-git'),

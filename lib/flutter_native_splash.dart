@@ -4,7 +4,7 @@ Future flutterNativeSplash(String color) async {
   final file = File('flutter_native_splash.yaml');
   if (file.existsSync() == false) {
     file.createSync();
-    file.writeAsStringSync(body(color ?? 'FF0000'));
+    file.writeAsStringSync(body(color ?? 'FFFFFF'));
   } else {
     if (color != null) {
       file.writeAsStringSync(body(color));
