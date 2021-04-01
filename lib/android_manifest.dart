@@ -14,6 +14,22 @@ Future<void> androidManifest({
     file.createSync();
   }
 
+  String notiIcon = '';
+
+  final notiFile = File('android/app/src/main/res/drawable/noti_icon.png');
+  final colorsFile = File('android/app/src/main/res/values/colors.xml');
+  if(notiFile.existsSync() && colorsFile.readAsStringSync().contains('noti_color')){
+    notiIcon = '''
+<meta-data
+          android:name="com.google.firebase.messaging.default_notification_icon"
+          android:resource="@drawable/noti_icon"
+          />
+        <meta-data
+          android:name="com.google.firebase.messaging.default_notification_color"
+          android:resource="@color/noti_color"
+          />''';
+  }
+
   final xml = XmlDocument.parse(file.readAsStringSync());
   final man = xml.rootElement;
   final oldBundle = man.attributes.firstWhere((e) => e.name.local == 'package', orElse: () => null)?.value ?? 'null';
@@ -147,6 +163,8 @@ Future<void> androidManifest({
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        
+        $notiIcon
 
     </application>
 </manifest>

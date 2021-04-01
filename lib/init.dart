@@ -1,6 +1,7 @@
+import 'package:config_reader/colors.dart';
 import 'package:config_reader/pubspec.dart';
 import 'package:config_reader/strings_xml.dart';
-import 'package:config_reader/tempJson.dart';
+import 'package:config_reader/temp_json.dart';
 import 'package:config_reader/version.dart';
 import 'package:process_run/shell_run.dart';
 
@@ -11,7 +12,7 @@ import 'download_images.dart';
 import 'flutter_launcher_icons.dart';
 import 'flutter_launcher_name.dart';
 import 'flutter_native_splash.dart';
-import 'gitIgnore.dart';
+import 'git_ignore.dart';
 import 'google_services_plist.dart';
 import 'info_plist.dart';
 import 'utils.dart';
@@ -19,6 +20,7 @@ import 'utils.dart';
 final shell = Shell();
 
 Future<void> init({
+  bool local = false,
   bool addToGit = false,
   bool incrementIOS = false,
   bool incrementAndroid = false,
@@ -45,6 +47,9 @@ Future<void> init({
 
   final iconUrl = config.getMap('meta')?.getMap('app')?.get('appIcon');
 
+  final notiIconUrl = config.getMap('meta')?.getMap('notifications')?.get('icon');
+  final notiColor = config.getMap('meta')?.getMap('notifications')?.get('color');
+
   final versionsMap = await versions();
   if (incrementIOS && versionsMap == null) {
     print('Please set the last ios version to CFBundleShortVersionString in ios/Runner/Info.plist file');
@@ -56,6 +61,11 @@ Future<void> init({
   await downloadImages(
     splashUrl: splashUrl,
     iconUrl: iconUrl,
+    notiIconUrl: notiIconUrl,
+  );
+
+  await colors(
+    notiColor: notiColor,
   );
 
   // await createSplash('FF0000');
@@ -94,6 +104,7 @@ Future<void> init({
   );
 
   await changePubspec(
+    remoteConfigReaderDep: !local,
     version: incrementAndroid ? androidVersion : null,
   );
 

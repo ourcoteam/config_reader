@@ -1,4 +1,6 @@
 {
-  "androidLastVersion": "1.0.3",
-  "iosLastVersion": "1.0.3"
+  "notification": {
+    "icon": "icon url must be 20x20 and png",
+    "color": "icon background color"
+  }
 }

@@ -1,6 +1,9 @@
 import 'dart:io';
 
-Future<void> changePubspec({String version}) async {
+Future<void> changePubspec({
+  String version,
+  bool remoteConfigReaderDep,
+}) async {
   final file = File('pubspec.yaml');
   final lastAndroidVersionString = file.readAsLinesSync().firstWhere((element) => element.contains('version:'));
   file.writeAsStringSync('''
@@ -9,7 +12,7 @@ description: A new Flutter project.
 
 # publish_to: "none"
 
-${version!=null?"version: $version":lastAndroidVersionString}
+${version != null ? "version: $version" : lastAndroidVersionString}
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -34,8 +37,8 @@ dependencies:
   bloc: ^6.0.3
   flutter_bloc: ^6.0.6
   dartz: ^0.9.2
-  freezed_annotation: ^0.12.0
-  json_annotation: ^3.1.0
+  freezed_annotation: 0.12.0
+  json_annotation: 3.1.1
   fluttertoast: ^7.1.1
   url_launcher: ^5.7.2
   image_picker: ^0.6.7+11
@@ -113,22 +116,28 @@ dependencies:
 
 dependency_overrides:
   flutter_svg: ^0.18.0
+  build_runner_core: 6.1.7
 #  analyzer: 0.39.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.3
-  freezed: ^0.12.1
-  json_serializable: ^3.5.0
+  build_runner: 1.11.1
+  freezed: 0.12.7
+  json_serializable: 3.5.1
   flutter_launcher_icons: ^0.8.1
   flutter_native_splash: ^0.1.9
   flutter_launcher_name: ^0.0.1
   rename: ^1.2.0
   change_app_package_name: ^0.1.2
-  config_reader:
+  ${
+  remoteConfigReaderDep?'''
+config_reader:
     git:
-      url: https://github.com/ourcoteam/config_reader
+      url: https://github.com/ourcoteam/config_reader''':'''
+config_reader:
+    path: C:/Users/eldee/AndroidStudioProjects/config_reader'''
+  }
   custom_flutter_launcher_name:
     git:
       url: https://github.com/ourcoteam/custom_flutter_launcher_name
