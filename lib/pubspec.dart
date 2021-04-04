@@ -59,7 +59,7 @@ dependencies:
   share: ^0.6.5+2
   flutter_statusbarcolor: ^0.2.3
   #file_picker: ^2.0.11
-  firebase_messaging: ^7.0.2
+  firebase_messaging: ^8.0.0-dev.11
   app_review: ^2.0.1
   flutter_svg: ^0.18.0
   store_redirect: ^1.0.2
