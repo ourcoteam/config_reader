@@ -113,6 +113,7 @@ dependencies:
   html_unescape: ^1.0.2
   flutter_highlight: ^0.6.0
   webview_flutter: ^1.0.7
+  flutter_app_badger: ^1.1.2
 
 dependency_overrides:
   flutter_svg: ^0.18.0
