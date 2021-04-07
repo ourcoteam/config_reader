@@ -3,7 +3,8 @@ import 'dart:io';
 Future<String> getReversedClientId() async {
   final file = File('ios/Runner/GoogleService-Info.plist');
   if (file.existsSync() == false) {
-    throw 'GoogleInfo.plist not found in ios/Runner';
+    print('GoogleInfo.plist not found in ios/Runner');
+    return null;
   }
 
   final lines = file.readAsLinesSync();
@@ -13,5 +14,6 @@ Future<String> getReversedClientId() async {
     }
   }
 
-  throw 'no REVERSED_CLIENT_ID found in GoogleInfo.plist ';
+  print('no REVERSED_CLIENT_ID found in GoogleInfo.plist ');
+  return null;
 }

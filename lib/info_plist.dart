@@ -31,7 +31,8 @@ Future<void> infoPlist({
 
   if (version != null) {
     final cfBundleShortVersionStringElement = XmlElement(XmlName('string'), [], [XmlText(version)]);
-    final cfBundleShortVersionStringKey = dict().children.firstWhere((e) => e.text == 'CFBundleShortVersionString', orElse: () => null);
+    final cfBundleShortVersionStringKey =
+        dict().children.firstWhere((e) => e.text == 'CFBundleShortVersionString', orElse: () => null);
     if (cfBundleShortVersionStringKey == null) {
       dict().children.add(XmlElement(XmlName('key'), [], [XmlText('CFBundleShortVersionString')]));
       dict().children.add(cfBundleShortVersionStringElement);
@@ -77,7 +78,8 @@ Future<void> infoPlist({
     XmlElement(XmlName('string'), [], [XmlText('fbauth2')]),
     XmlElement(XmlName('string'), [], [XmlText('fbshareextension')]),
   ]);
-  final lSApplicationQueriesSchemesKey = dict().children.firstWhere((e) => e.text == 'LSApplicationQueriesSchemes', orElse: () => null);
+  final lSApplicationQueriesSchemesKey =
+      dict().children.firstWhere((e) => e.text == 'LSApplicationQueriesSchemes', orElse: () => null);
   if (lSApplicationQueriesSchemesKey == null) {
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('LSApplicationQueriesSchemes')]));
     dict().children.add(lSApplicationQueriesSchemesElement);
@@ -93,14 +95,15 @@ Future<void> infoPlist({
         XmlElement(XmlName('string'), [], [XmlText('fb$facebookId')]),
       ]),
     ]),
-    XmlElement(XmlName('dict'), [], [
-      XmlElement(XmlName('key'), [], [XmlText('CFBundleTypeRole')]),
-      XmlElement(XmlName('string'), [], [XmlText('Editor')]),
-      XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
-      XmlElement(XmlName('array'), [], [
-        XmlElement(XmlName('string'), [], [XmlText(reversedClientId)]),
+    if (reversedClientId != null)
+      XmlElement(XmlName('dict'), [], [
+        XmlElement(XmlName('key'), [], [XmlText('CFBundleTypeRole')]),
+        XmlElement(XmlName('string'), [], [XmlText('Editor')]),
+        XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
+        XmlElement(XmlName('array'), [], [
+          XmlElement(XmlName('string'), [], [XmlText(reversedClientId)]),
+        ]),
       ]),
-    ]),
   ]);
   final cFBundleURLTypesKey = dict().children.firstWhere((e) => e.text == 'CFBundleURLTypes', orElse: () => null);
   if (cFBundleURLTypesKey == null) {
