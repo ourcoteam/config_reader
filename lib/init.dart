@@ -120,14 +120,12 @@ Future<void> init({
   final bundle = 'flutter pub run change_app_package_name:main $appBundleAndroid';
   final gitAdd = 'git add .';
 
-  await shell.run([
-    clean,
-    pubGet,
-    bundle,
-    splash,
-    icons,
-    name,
-  ].join(' && '));
+  await shell.run(clean);
+  await shell.run(pubGet);
+  await shell.run(bundle);
+  await shell.run(splash);
+  await shell.run(icons);
+  await shell.run(name);
 
   if (addToGit) {
     await commentGitIgnore();
