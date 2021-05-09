@@ -50,7 +50,7 @@ dependencies:
   youtube_player_flutter: ^7.0.0+7
   font_awesome_flutter: ^8.11.0
   recase: ^3.0.1
-  firebase_crashlytics: ^0.4.0+1
+  firebase_crashlytics: ^0.2.4
   mailer: ^3.2.1
   device_info: 1.0.0
   shimmer: ^1.1.1
@@ -65,7 +65,7 @@ dependencies:
   store_redirect: ^1.0.2
   flutter_i18n: ^0.19.4
   path_provider: ^1.6.18
-#  firebase_admob: ^0.10.0+1
+  firebase_admob: ^0.10.0+1
   admob_flutter: ^1.0.1
   dio: ^3.0.10
   page_transition: ^1.1.7+2
@@ -103,9 +103,9 @@ dependencies:
   dotted_line: ^2.0.1
   drop_cap_text: ^1.0.7
   sign_in_with_apple: ^2.5.4
-  firebase_auth: ^0.20.1
-  firebase_core: ^0.7.0
-#  firebase_auth_oauth: ^0.2.0
+  firebase_auth: ^0.18.0+1
+  firebase_core: ^0.5.0
+  firebase_auth_oauth: ^0.2.0
   # flutter_twitter_login: ^1.1.0
   badges: ^1.1.4
   notification_permissions: ^0.4.8
@@ -114,7 +114,6 @@ dependencies:
   flutter_highlight: ^0.6.0
   webview_flutter: ^1.0.7
   flutter_app_badger: ^1.1.2
-  firebase_in_app_messaging: ^0.3.0+1
 
 dependency_overrides:
   flutter_svg: ^0.18.0
