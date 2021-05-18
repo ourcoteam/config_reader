@@ -1,5 +1,29 @@
 {
-  "ios": {
-    "att": "..."
+  "meta": {
+    "baseUrl": "",
+    "app": {
+      "appName": "",
+      "appIcon": ""
+    },
+    "notifications": {
+      "icon": "",
+      "color": ""
+    },
+    "ios": {
+      "keyId": "",
+      "issuerId": "",
+      "authKey": "",
+      "att": ""
+    },
+    "splash": {
+      "color": "",
+      "image": ""
+    },
+    "socialLogin": {
+      "facebook": {
+        "id": "",
+        "name": ""
+      }
+    }
   }
 }
