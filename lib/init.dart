@@ -39,7 +39,7 @@ Future<void> init({
   final issuerId = config.getMap('meta')?.getMap('ios')?.get('issuerId');
   final authKey = config.getMap('meta')?.getMap('ios')?.get('authKey');
   final nSUserTrackingUsageDescription =
-      config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.2222222222';
+      config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
 
   // final adMobIdAndroid = config.getMap('meta')?.getMap('adMob')?.get('androidID') ?? 'GAD_Android';
   // final adMobIdIOS = config.getMap('meta')?.getMap('adMob')?.get('IosID') ?? 'GAD_IOS';
