@@ -114,6 +114,7 @@ dependencies:
   flutter_highlight: ^0.6.0
   webview_flutter: ^1.0.7
   flutter_app_badger: ^1.1.2
+  app_tracking_transparency: ^1.1.0+1
 
 dependency_overrides:
   flutter_svg: ^0.18.0
