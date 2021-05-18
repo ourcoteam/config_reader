@@ -8,6 +8,7 @@ Future<void> infoPlist({
   String facebookName,
   String facebookId,
   String reversedClientId,
+  String nSUserTrackingUsageDescription,
 }) async {
   final file = File('ios/Runner/Info.plist');
   if (file.existsSync() == false) {
@@ -112,6 +113,16 @@ Future<void> infoPlist({
   } else {
     dict().children.removeAt(dict().children.indexOf(cFBundleURLTypesKey) + 1);
     dict().children[dict().children.indexOf(cFBundleURLTypesKey) + 1] = cFBundleURLTypesElement;
+  }
+
+  final nSUserTrackingUsageDescriptionElement = XmlElement(XmlName('string'), [], [XmlText(nSUserTrackingUsageDescription)]);
+  final nSUserTrackingUsageDescriptionKey = dict().children.firstWhere((e) => e.text == 'NSUserTrackingUsageDescription', orElse: () => null);
+  if (nSUserTrackingUsageDescriptionKey == null) {
+    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('NSUserTrackingUsageDescription')]));
+    dict().children.add(nSUserTrackingUsageDescriptionElement);
+  } else {
+    dict().children.removeAt(dict().children.indexOf(nSUserTrackingUsageDescriptionKey) + 1);
+    dict().children[dict().children.indexOf(nSUserTrackingUsageDescriptionKey) + 1] = nSUserTrackingUsageDescriptionElement;
   }
 
   final String newContent = xml.toXmlString(pretty: true);

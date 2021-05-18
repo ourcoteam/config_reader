@@ -1,6 +1,5 @@
 {
-  "notification": {
-    "icon": "icon url must be 20x20 and png",
-    "color": "icon background color"
+  "ios": {
+    "att": "..."
   }
 }
