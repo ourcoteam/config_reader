@@ -19,6 +19,11 @@
       "color": "",
       "image": ""
     },
+    "ads": {
+      "google": {
+        "id": ""
+      }
+    },
     "socialLogin": {
       "facebook": {
         "id": "",

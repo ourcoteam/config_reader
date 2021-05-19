@@ -28,6 +28,7 @@ Future<void> init({
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig);
 
+  final adMobId = config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
   final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id') ?? 'FACE_ID';
   final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name') ?? 'FACE_NAME';
   final appName = config.getMap('meta')?.getMap('app')?.get('appName') ?? staticConfig.get('appName');
@@ -90,6 +91,7 @@ Future<void> init({
     bundle: appBundleAndroid,
     baseUrl: baseUrl,
     name: appName,
+    adMobId: adMobId,
   );
 
   await infoPlist(
@@ -99,6 +101,7 @@ Future<void> init({
     facebookName: facebookName,
     reversedClientId: await getReversedClientId(),
     nSUserTrackingUsageDescription: nSUserTrackingUsageDescription,
+    adMobId: adMobId,
   );
 
   await parseFacebook(

@@ -65,7 +65,7 @@ dependencies:
   store_redirect: ^1.0.2
   flutter_i18n: ^0.19.4
   path_provider: ^1.6.18
-  firebase_admob: ^0.10.0+1
+  #firebase_admob: ^0.10.0+1
   admob_flutter: ^1.0.1
   dio: ^3.0.10
   page_transition: ^1.1.7+2
@@ -115,6 +115,7 @@ dependencies:
   webview_flutter: ^1.0.7
   flutter_app_badger: ^1.1.2
   app_tracking_transparency: ^1.1.0+1
+  google_mobile_ads: ^0.11.0+4
 
 dependency_overrides:
   flutter_svg: ^0.18.0

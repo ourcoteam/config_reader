@@ -8,6 +8,7 @@ Future<void> infoPlist({
   String facebookName,
   String facebookId,
   String reversedClientId,
+  String adMobId,
   String nSUserTrackingUsageDescription,
 }) async {
   final file = File('ios/Runner/Info.plist');
@@ -21,19 +22,32 @@ Future<void> infoPlist({
   XmlElement plist() => xml.getElement('plist');
   XmlElement dict() => plist().getElement('dict');
 
-  // final gADApplicationIdentifierElement = XmlElement(XmlName('string'), [], [XmlText(adMobId)]);
-  // final gADApplicationIdentifierKey = dict().children.firstWhere((e) => e.text == 'GADApplicationIdentifier', orElse: () => null);
-  // if (gADApplicationIdentifierKey == null) {
-  //   dict().children.add(XmlElement(XmlName('key'), [], [XmlText('GADApplicationIdentifier')]));
-  //   dict().children.add(gADApplicationIdentifierElement);
-  // } else {
-  //   dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
-  // }
+  final gADApplicationIdentifierElement = XmlElement(XmlName('string'), [], [XmlText(adMobId)]);
+  final gADApplicationIdentifierKey = dict().children.firstWhere((e) => e.text == 'GADApplicationIdentifier', orElse: () => null);
+  if (gADApplicationIdentifierKey == null) {
+    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('GADApplicationIdentifier')]));
+    dict().children.add(gADApplicationIdentifierElement);
+  } else {
+    dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
+  }
+
+  final sKAdNetworkItemsElement = XmlElement(XmlName('array'), [], [
+    XmlElement(XmlName('dict'), [], [
+      XmlElement(XmlName('key'), [], [XmlText('SKAdNetworkIdentifier')]),
+      XmlElement(XmlName('string'), [], [XmlText('cstr6suwn9.skadnetwork')]),
+    ]),
+  ]);
+  final sKAdNetworkItemsKey = dict().children.firstWhere((e) => e.text == 'SKAdNetworkItems', orElse: () => null);
+  if (sKAdNetworkItemsKey == null) {
+    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('SKAdNetworkItems')]));
+    dict().children.add(sKAdNetworkItemsElement);
+  } else {
+    dict().children[dict().children.indexOf(sKAdNetworkItemsKey) + 1] = sKAdNetworkItemsElement;
+  }
 
   if (version != null) {
     final cfBundleShortVersionStringElement = XmlElement(XmlName('string'), [], [XmlText(version)]);
-    final cfBundleShortVersionStringKey =
-        dict().children.firstWhere((e) => e.text == 'CFBundleShortVersionString', orElse: () => null);
+    final cfBundleShortVersionStringKey = dict().children.firstWhere((e) => e.text == 'CFBundleShortVersionString', orElse: () => null);
     if (cfBundleShortVersionStringKey == null) {
       dict().children.add(XmlElement(XmlName('key'), [], [XmlText('CFBundleShortVersionString')]));
       dict().children.add(cfBundleShortVersionStringElement);
@@ -79,8 +93,7 @@ Future<void> infoPlist({
     XmlElement(XmlName('string'), [], [XmlText('fbauth2')]),
     XmlElement(XmlName('string'), [], [XmlText('fbshareextension')]),
   ]);
-  final lSApplicationQueriesSchemesKey =
-      dict().children.firstWhere((e) => e.text == 'LSApplicationQueriesSchemes', orElse: () => null);
+  final lSApplicationQueriesSchemesKey = dict().children.firstWhere((e) => e.text == 'LSApplicationQueriesSchemes', orElse: () => null);
   if (lSApplicationQueriesSchemesKey == null) {
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('LSApplicationQueriesSchemes')]));
     dict().children.add(lSApplicationQueriesSchemesElement);
@@ -116,7 +129,8 @@ Future<void> infoPlist({
   }
 
   final nSUserTrackingUsageDescriptionElement = XmlElement(XmlName('string'), [], [XmlText(nSUserTrackingUsageDescription)]);
-  final nSUserTrackingUsageDescriptionKey = dict().children.firstWhere((e) => e.text == 'NSUserTrackingUsageDescription', orElse: () => null);
+  final nSUserTrackingUsageDescriptionKey =
+      dict().children.firstWhere((e) => e.text == 'NSUserTrackingUsageDescription', orElse: () => null);
   if (nSUserTrackingUsageDescriptionKey == null) {
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('NSUserTrackingUsageDescription')]));
     dict().children.add(nSUserTrackingUsageDescriptionElement);

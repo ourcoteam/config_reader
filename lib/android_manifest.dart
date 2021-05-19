@@ -6,6 +6,7 @@ Future<void> androidManifest({
   String bundle,
   String baseUrl,
   String name,
+  String adMobId,
 }) async {
   final path = 'android/app/src/main';
 
@@ -124,7 +125,7 @@ Future<void> androidManifest({
             />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3102006508276410~8783578315"
+            android:value="$adMobId"
             />
 
         <provider
