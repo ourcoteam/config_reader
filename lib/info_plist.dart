@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:config_reader/utils/utils.dart';
 import 'package:xml/xml.dart';
 
 Future<void> infoPlist({
@@ -42,6 +43,7 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('SKAdNetworkItems')]));
     dict().children.add(sKAdNetworkItemsElement);
   } else {
+    dict().children.removeAt(dict().children.indexOf(sKAdNetworkItemsKey) + 1);
     dict().children[dict().children.indexOf(sKAdNetworkItemsKey) + 1] = sKAdNetworkItemsElement;
   }
 
@@ -67,24 +69,37 @@ Future<void> infoPlist({
     dict().children[dict().children.indexOf(cFBundleIdentifierKey) + 1] = cFBundleIdentifierElement;
   }
 
-  final facebookAppIDElement = XmlElement(XmlName('string'), [], [XmlText(facebookId)]);
   final facebookAppIDKey = dict().children.firstWhere((e) => e.text == 'FacebookAppID', orElse: () => null);
-  if (facebookAppIDKey == null) {
-    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookAppID')]));
-    dict().children.add(facebookAppIDElement);
-  } else {
-    dict().children.removeAt(dict().children.indexOf(facebookAppIDKey) + 1);
-    dict().children[dict().children.indexOf(facebookAppIDKey) + 1] = facebookAppIDElement;
-  }
-
-  final facebookDisplayNameElement = XmlElement(XmlName('string'), [], [XmlText(facebookName)]);
   final facebookDisplayNameKey = dict().children.firstWhere((e) => e.text == 'FacebookDisplayName', orElse: () => null);
-  if (facebookDisplayNameKey == null) {
-    dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookDisplayName')]));
-    dict().children.add(facebookDisplayNameElement);
+  if (stringNotNullOrEmpty(facebookId) && stringNotNullOrEmpty(facebookName)) {
+    final facebookAppIDElement = XmlElement(XmlName('string'), [], [XmlText(facebookId)]);
+    if (facebookAppIDKey == null) {
+      dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookAppID')]));
+      dict().children.add(facebookAppIDElement);
+    } else {
+      dict().children.removeAt(dict().children.indexOf(facebookAppIDKey) + 1);
+      dict().children[dict().children.indexOf(facebookAppIDKey) + 1] = facebookAppIDElement;
+    }
+
+    final facebookDisplayNameElement = XmlElement(XmlName('string'), [], [XmlText(facebookName)]);
+    if (facebookDisplayNameKey == null) {
+      dict().children.add(XmlElement(XmlName('key'), [], [XmlText('FacebookDisplayName')]));
+      dict().children.add(facebookDisplayNameElement);
+    } else {
+      dict().children.removeAt(dict().children.indexOf(facebookDisplayNameKey) + 1);
+      dict().children[dict().children.indexOf(facebookDisplayNameKey) + 1] = facebookDisplayNameElement;
+    }
   } else {
-    dict().children.removeAt(dict().children.indexOf(facebookDisplayNameKey) + 1);
-    dict().children[dict().children.indexOf(facebookDisplayNameKey) + 1] = facebookDisplayNameElement;
+    if (facebookAppIDKey != null) {
+      final index = dict().children.indexOf(facebookAppIDKey);
+      dict().children.removeAt(index);
+      dict().children.removeAt(index + 1);
+    }
+    if (facebookDisplayNameKey != null) {
+      final index = dict().children.indexOf(facebookDisplayNameKey);
+      dict().children.removeAt(index);
+      dict().children.removeAt(index + 1);
+    }
   }
 
   final lSApplicationQueriesSchemesElement = XmlElement(XmlName('array'), [], [
@@ -103,12 +118,13 @@ Future<void> infoPlist({
   }
 
   final cFBundleURLTypesElement = XmlElement(XmlName('array'), [], [
-    XmlElement(XmlName('dict'), [], [
-      XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
-      XmlElement(XmlName('array'), [], [
-        XmlElement(XmlName('string'), [], [XmlText('fb$facebookId')]),
+    if (stringNotNullOrEmpty(facebookId))
+      XmlElement(XmlName('dict'), [], [
+        XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
+        XmlElement(XmlName('array'), [], [
+          XmlElement(XmlName('string'), [], [XmlText('fb$facebookId')]),
+        ]),
       ]),
-    ]),
     if (reversedClientId != null)
       XmlElement(XmlName('dict'), [], [
         XmlElement(XmlName('key'), [], [XmlText('CFBundleTypeRole')]),
@@ -129,8 +145,7 @@ Future<void> infoPlist({
   }
 
   final nSUserTrackingUsageDescriptionElement = XmlElement(XmlName('string'), [], [XmlText(nSUserTrackingUsageDescription)]);
-  final nSUserTrackingUsageDescriptionKey =
-      dict().children.firstWhere((e) => e.text == 'NSUserTrackingUsageDescription', orElse: () => null);
+  final nSUserTrackingUsageDescriptionKey = dict().children.firstWhere((e) => e.text == 'NSUserTrackingUsageDescription', orElse: () => null);
   if (nSUserTrackingUsageDescriptionKey == null) {
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('NSUserTrackingUsageDescription')]));
     dict().children.add(nSUserTrackingUsageDescriptionElement);

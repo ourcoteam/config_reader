@@ -7,6 +7,8 @@ Future<void> androidManifest({
   String baseUrl,
   String name,
   String adMobId,
+  String deeplink,
+  String applink,
 }) async {
   final path = 'android/app/src/main';
 
@@ -19,7 +21,7 @@ Future<void> androidManifest({
 
   final notiFile = File('android/app/src/main/res/drawable/noti_icon.png');
   final colorsFile = File('android/app/src/main/res/values/colors.xml');
-  if(notiFile.existsSync() && colorsFile.readAsStringSync().contains('noti_color')){
+  if (notiFile.existsSync() && colorsFile.readAsStringSync().contains('noti_color')) {
     notiIcon = '''
 <meta-data
           android:name="com.google.firebase.messaging.default_notification_icon"
@@ -38,6 +40,19 @@ Future<void> androidManifest({
   final oldName = app.attributes.firstWhere((e) => e.name.local == 'label', orElse: () => null)?.value ?? 'null';
 
   final prov = r'${applicationId}.provider';
+
+  final deepLinkHost = deeplink != null ? Uri.parse(deeplink).host : '';
+  final deepLinkScheme = deeplink != null ? Uri.parse(deeplink).scheme : '';
+  final deepLinkPathPattern = deeplink != null ? Uri.parse(deeplink).path : '';
+
+  final appLinkHost = Uri.parse(applink).host;
+  final appLinkPathPattern = Uri.parse(applink).path;
+
+  final applinkPathPatternElement =
+      appLinkPathPattern != null && appLinkPathPattern.isNotEmpty ? '\n\t\t\t\t\tandroid:pathPattern="${appLinkPathPattern.startsWith('/') ? '' : '/'}$appLinkPathPattern"' : '';
+  final deeplinkPathPatternElement = deepLinkPathPattern != null && deepLinkPathPattern.isNotEmpty
+      ? '\n\t\t\t\t\tandroid:pathPattern="${deepLinkPathPattern.startsWith('/') ? '' : '/'}$deepLinkPathPattern"'
+      : '';
 
   file.writeAsStringSync('''
 <manifest
@@ -92,6 +107,7 @@ Future<void> androidManifest({
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            ${deeplink != null ? '''
             <!-- Deep Links -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -100,10 +116,11 @@ Future<void> androidManifest({
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="app.ask.application"
-                    android:scheme="appbear"
+                    android:scheme="$deepLinkScheme"
+                    android:host="$deepLinkHost"$deeplinkPathPatternElement
                     />
             </intent-filter>
+            ''' : ''}
             <!-- App Links -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -112,8 +129,8 @@ Future<void> androidManifest({
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="appstage.tielabs.com"
                     android:scheme="https"
+                    android:host="$appLinkHost"$applinkPathPatternElement
                     />
             </intent-filter>
         </activity>
@@ -200,105 +217,3 @@ Future<void> profileAndroidManifest(String bundle) async {
 </manifest>
   ''');
 }
-
-/*
-final content = file.readAsStringSync();
-  final xml = XmlDocument.parse(content);
-
-  XmlElement manifest() => xml.rootElement;
-
-  manifest().setAttribute('xmlns:tools', 'http://schemas.android.com/tools');
-
-  XmlElement application() => manifest().getElement('application');
-
-  application().setAttribute('tools:replace', 'android:label,android:name');
-
-  final XmlElement faceBookMetaData = application().findElements('meta-data').firstWhere(
-        (element) => element.attributes.any(
-          (e) => e.name.local == 'android:name' && e.value == 'com.facebook.sdk.ApplicationId',
-        ),
-        orElse: () => null,
-      );
-
-  final faceBookMetaDataElement = XmlElement(
-    XmlName('meta-data'),
-    [
-      XmlAttribute(XmlName("android:name"), "com.facebook.sdk.ApplicationId"),
-      XmlAttribute(XmlName("android:value"), "@string/facebook_app_id"),
-    ],
-  );
-  if (faceBookMetaData == null) {
-    application().children.add(faceBookMetaDataElement);
-  } else {
-    application().children[application().children.indexOf(faceBookMetaData)] = faceBookMetaDataElement;
-  }
-
-  final XmlElement faceBookActivity = application().findElements('activity').firstWhere(
-        (element) => element.attributes.any(
-          (e) => e.name.local == 'android:name' && e.value == 'com.facebook.FacebookActivity',
-        ),
-        orElse: () => null,
-      );
-
-  final faceBookActivityElement = XmlElement(
-    XmlName('activity'),
-    [
-      XmlAttribute(XmlName("android:name"), "com.facebook.FacebookActivity"),
-      XmlAttribute(XmlName("android:configChanges"), "keyboard|keyboardHidden|screenLayout|screenSize|orientation"),
-      XmlAttribute(XmlName("android:label"), "@string/app_name"),
-    ],
-  );
-  if (faceBookActivity == null) {
-    application().children.add(faceBookActivityElement);
-  } else {
-    application().children[application().children.indexOf(faceBookActivity)] = faceBookActivityElement;
-  }
-
-  final XmlElement faceBookTabActivity = application().findElements('activity').firstWhere(
-        (element) => element.attributes.any(
-          (e) => e.name.local == 'android:name' && e.value == 'com.facebook.CustomTabActivity',
-        ),
-        orElse: () => null,
-      );
-
-  final faceBookTabActivityElement = XmlElement(
-    XmlName('activity'),
-    [
-      XmlAttribute(XmlName("android:name"), "com.facebook.FacebookActivity"),
-      XmlAttribute(XmlName("android:exported"), "true"),
-    ],
-    [
-      XmlElement(
-        XmlName('intent-filter'),
-        [],
-        [
-          XmlElement(
-            XmlName('action'),
-            [XmlAttribute(XmlName("android:name"), "android.intent.action.VIEW")],
-            [],
-          ),
-          XmlElement(
-            XmlName('category'),
-            [XmlAttribute(XmlName("android:name"), "android.intent.category.DEFAULT")],
-            [],
-          ),
-          XmlElement(
-            XmlName('category'),
-            [XmlAttribute(XmlName("android:name"), "android.intent.category.BROWSABLE")],
-            [],
-          ),
-          XmlElement(
-            XmlName('data'),
-            [XmlAttribute(XmlName("android:scheme"), "@string/fb_login_protocol_scheme")],
-            [],
-          ),
-        ],
-      ),
-    ],
-  );
-  if (faceBookTabActivity == null) {
-    application().children.add(faceBookTabActivityElement);
-  } else {
-    application().children[application().children.indexOf(faceBookTabActivity)] = faceBookTabActivityElement;
-  }
- */

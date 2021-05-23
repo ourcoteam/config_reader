@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:config_reader/utils/utils.dart';
 import 'package:xml/xml.dart';
 
 Future<void> parseFacebook({String facebookName, String facebookId}) async {
@@ -17,19 +18,19 @@ Future<void> parseFacebook({String facebookName, String facebookId}) async {
     builder.element('string', attributes: {
       'name': 'app_name',
     }, nest: () {
-      builder.text(facebookName);
+      builder.text(facebookName??'FACEBOOK_NAME');
     });
 
     builder.element('string', attributes: {
       'name': 'facebook_app_id',
     }, nest: () {
-      builder.text(facebookId);
+      builder.text(facebookId??'FACEBOOK_ID');
     });
 
     builder.element('string', attributes: {
       'name': 'fb_login_protocol_scheme',
     }, nest: () {
-      builder.text('fb$facebookId');
+      builder.text('fb${facebookId??'FACEBOOK_ID'}');
     });
   });
 

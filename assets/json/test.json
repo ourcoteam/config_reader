@@ -1,6 +1,8 @@
 {
   "meta": {
     "baseUrl": "",
+    "deeplink": "",
+    "applink": "",
     "app": {
       "appName": "",
       "appIcon": ""

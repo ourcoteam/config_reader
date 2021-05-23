@@ -2,6 +2,7 @@ import 'package:config_reader/colors.dart';
 import 'package:config_reader/pubspec.dart';
 import 'package:config_reader/strings_xml.dart';
 import 'package:config_reader/temp_json.dart';
+import 'package:config_reader/utils/utils.dart';
 import 'package:config_reader/version.dart';
 import 'package:process_run/shell_run.dart';
 
@@ -29,9 +30,9 @@ Future<void> init({
   final config = await getConfig(staticConfig);
 
   final adMobId = config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
-  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id') ?? 'FACE_ID';
-  final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name') ?? 'FACE_NAME';
-  final appName = config.getMap('meta')?.getMap('app')?.get('appName') ?? staticConfig.get('appName');
+  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id');
+  final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name');
+  final appName = tryString(config.getMap('meta')?.getMap('app')?.get('appName'), staticConfig.get('appName'));
   final appBundleAndroid = staticConfig.get('appIdAndroid');
   final appBundleIOS = staticConfig.get('appIdIOS');
   final baseUrl = config.getMap('meta')?.get('baseUrl') ?? staticConfig.get('serviceUrl') ?? staticConfig.get('baseUrl');
@@ -39,8 +40,10 @@ Future<void> init({
   final keyId = config.getMap('meta')?.getMap('ios')?.get('keyId');
   final issuerId = config.getMap('meta')?.getMap('ios')?.get('issuerId');
   final authKey = config.getMap('meta')?.getMap('ios')?.get('authKey');
-  final nSUserTrackingUsageDescription =
-      config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
+  final nSUserTrackingUsageDescription = config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
+
+  final String applink = tryString(config.getMap('meta')?.get('applink'), baseUrl);
+  final String deeplink = config.getMap('meta')?.get('deeplink');
 
   // final adMobIdAndroid = config.getMap('meta')?.getMap('adMob')?.get('androidID') ?? 'GAD_Android';
   // final adMobIdIOS = config.getMap('meta')?.getMap('adMob')?.get('IosID') ?? 'GAD_IOS';
@@ -92,6 +95,8 @@ Future<void> init({
     baseUrl: baseUrl,
     name: appName,
     adMobId: adMobId,
+    deeplink: deeplink,
+    applink: applink,
   );
 
   await infoPlist(
