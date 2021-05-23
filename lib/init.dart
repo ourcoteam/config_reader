@@ -1,5 +1,6 @@
 import 'package:config_reader/colors.dart';
 import 'package:config_reader/pubspec.dart';
+import 'package:config_reader/runner_entitlements.dart';
 import 'package:config_reader/strings_xml.dart';
 import 'package:config_reader/temp_json.dart';
 import 'package:config_reader/utils/utils.dart';
@@ -107,6 +108,11 @@ Future<void> init({
     reversedClientId: await getReversedClientId(),
     nSUserTrackingUsageDescription: nSUserTrackingUsageDescription,
     adMobId: adMobId,
+    deeplink: deeplink,
+  );
+
+  await runnerEntitlements(
+    applink: applink,
   );
 
   await parseFacebook(

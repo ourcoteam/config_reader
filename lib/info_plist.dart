@@ -11,6 +11,7 @@ Future<void> infoPlist({
   String reversedClientId,
   String adMobId,
   String nSUserTrackingUsageDescription,
+  String deeplink,
 }) async {
   final file = File('ios/Runner/Info.plist');
   if (file.existsSync() == false) {
@@ -29,6 +30,7 @@ Future<void> infoPlist({
     dict().children.add(XmlElement(XmlName('key'), [], [XmlText('GADApplicationIdentifier')]));
     dict().children.add(gADApplicationIdentifierElement);
   } else {
+    dict().children.removeAt(dict().children.indexOf(gADApplicationIdentifierKey) + 1);
     dict().children[dict().children.indexOf(gADApplicationIdentifierKey) + 1] = gADApplicationIdentifierElement;
   }
 
@@ -125,14 +127,18 @@ Future<void> infoPlist({
           XmlElement(XmlName('string'), [], [XmlText('fb$facebookId')]),
         ]),
       ]),
-    if (reversedClientId != null)
+    if (stringNotNullOrEmpty(reversedClientId) || stringNotNullOrEmpty(deeplink))
       XmlElement(XmlName('dict'), [], [
         XmlElement(XmlName('key'), [], [XmlText('CFBundleTypeRole')]),
         XmlElement(XmlName('string'), [], [XmlText('Editor')]),
-        XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
-        XmlElement(XmlName('array'), [], [
-          XmlElement(XmlName('string'), [], [XmlText(reversedClientId)]),
-        ]),
+        if (stringNotNullOrEmpty(deeplink)) XmlElement(XmlName('key'), [], [XmlText('CFBundleURLName')]),
+        if (stringNotNullOrEmpty(deeplink)) XmlElement(XmlName('string'), [], [XmlText(Uri.parse(deeplink).host + Uri.parse(deeplink).path)]),
+        if (stringNotNullOrEmpty(reversedClientId) || stringNotNullOrEmpty(deeplink)) XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
+        if (stringNotNullOrEmpty(reversedClientId) || stringNotNullOrEmpty(deeplink))
+          XmlElement(XmlName('array'), [], [
+            if (stringNotNullOrEmpty(reversedClientId)) XmlElement(XmlName('string'), [], [XmlText(reversedClientId)]),
+            if (stringNotNullOrEmpty(deeplink)) XmlElement(XmlName('string'), [], [XmlText(Uri.parse(deeplink).scheme)]),
+          ]),
       ]),
   ]);
   final cFBundleURLTypesKey = dict().children.firstWhere((e) => e.text == 'CFBundleURLTypes', orElse: () => null);
