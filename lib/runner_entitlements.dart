@@ -9,7 +9,11 @@ Future runnerEntitlements({
   if (file.existsSync() == false) {
     file.createSync();
   }
-  file.writeAsStringSync('''
+  final fileRelease = File('ios/Runner/RunnerRelease.entitlements');
+  if (fileRelease.existsSync() == false) {
+    fileRelease.createSync();
+  }
+  final content = '''
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -19,9 +23,13 @@ Future runnerEntitlements({
 	<key>com.apple.developer.associated-domains</key>
 	${stringNotNullOrEmpty(applink) ? '''
 <array>
-      <string>applinks:${Uri.parse(applink).host}</string>
+      <string>applinks:${Uri
+      .parse(applink)
+      .host}</string>
     </array>''' : ''}
 </dict>
 </plist>
-''');
+''';
+  file.writeAsStringSync(content);
+  fileRelease.writeAsStringSync(content);
 }
