@@ -23,10 +23,12 @@ Future runnerEntitlements({
 	<key>com.apple.developer.associated-domains</key>
 	${stringNotNullOrEmpty(applink) ? '''
 <array>
-      <string>applinks:${Uri
-      .parse(applink)
-      .host}</string>
+      <string>applinks:${Uri.parse(applink).host}</string>
     </array>''' : ''}
+    <key>com.apple.developer.applesignin</key>
+    <array>
+      <string>Default</string>
+    </array>
 </dict>
 </plist>
 ''';
