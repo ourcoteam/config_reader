@@ -69,6 +69,13 @@ Future<void> androidManifest({
            FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" android:host="youtube.com" />
+        </intent>
+    </queries>
 
     <application
         android:name="io.flutter.app.FlutterApplication"
