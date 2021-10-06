@@ -1,7 +1,7 @@
 import 'package:config_reader/init.dart';
 
 void main(List<String> args) {
-  print('v.1.0.17');
+  print('v.1.0.18');
 
   init(
     local: args.any((e) => e == '--local'),

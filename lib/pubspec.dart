@@ -102,7 +102,10 @@ dependencies:
   chewie_audio: ^1.0.0+1
   dotted_line: ^2.0.1
   drop_cap_text: ^1.0.7
-  sign_in_with_apple: ^2.5.4
+  sign_in_with_apple:
+    git:
+      url: https://github.com/ourcoteam/sign_in_with_apple_v2.git
+      ref: master
   firebase_auth: ^0.20.1
   firebase_core: ^0.7.0
 #  firebase_auth_oauth: ^0.2.0
