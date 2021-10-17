@@ -119,6 +119,7 @@ dependencies:
   flutter_app_badger: ^1.1.2
   app_tracking_transparency: ^1.1.0+1
   google_mobile_ads: ^0.11.0+4
+  flutter_math: 0.2.1
 
 dependency_overrides:
   flutter_svg: ^0.18.0
