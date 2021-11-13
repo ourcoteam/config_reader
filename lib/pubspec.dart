@@ -80,7 +80,8 @@ dependencies:
   connectivity: ^0.4.9+3
   expandable: ^4.1.4
   extended_text: ^4.0.0
-  flutter_widget_from_html: ^0.5.1+1
+  flutter_widget_from_html: 0.5.1+4
+  flutter_widget_from_html_core: 0.5.1+4
   #  flutter_widget_from_html_core: ^0.5.1+1
   #  webview_flutter: ^1.0.1
   extended_nested_scroll_view: ^1.0.1
