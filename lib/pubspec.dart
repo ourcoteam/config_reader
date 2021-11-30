@@ -56,7 +56,7 @@ dependencies:
   shimmer: ^1.1.1
   http_interceptor: ^0.3.2
   infinity_page_view: ^1.0.0
-  share: ^0.6.5+2
+  share: ^0.6.5+4
   flutter_statusbarcolor: ^0.2.3
   #file_picker: ^2.0.11
   firebase_messaging: ^8.0.0-dev.11
