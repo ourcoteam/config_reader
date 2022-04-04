@@ -91,6 +91,7 @@ dependencies:
   flutter_sticky_header: ^0.5.0
   flutter_hooks: ^0.14.1
   google_fonts: ^1.1.0
+  launch_review: ^2.0.0
   flutter_facebook_login: ^3.0.0
   google_sign_in: ^4.5.4
   video_player: ^0.10.12
