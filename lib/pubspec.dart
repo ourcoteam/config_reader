@@ -48,6 +48,7 @@ dependencies:
   http:
   flutter_fawry_pay: ^0.0.1+1
   youtube_player_flutter: ^7.0.0+7
+  flutter_youtube_view: ^1.1.10
   font_awesome_flutter: ^8.11.0
   recase: ^3.0.1
   firebase_crashlytics: ^0.4.0+1
