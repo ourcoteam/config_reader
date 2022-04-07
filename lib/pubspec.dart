@@ -52,6 +52,7 @@ dependencies:
   font_awesome_flutter: ^8.11.0
   recase: ^3.0.1
   firebase_crashlytics: ^0.4.0+1
+  cached_network_image: ^2.5.1
   mailer: ^3.2.1
   device_info: 1.0.0
   shimmer: ^1.1.1
