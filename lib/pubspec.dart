@@ -50,6 +50,8 @@ dependencies:
   youtube_player_flutter: ^7.0.0+7
   flutter_youtube_view: ^1.1.10
   font_awesome_flutter: ^8.11.0
+  country_pickers: ^1.3.0
+  flutter_multi_formatter: ^1.1.8
   recase: ^3.0.1
   firebase_crashlytics: ^0.4.0+1
   cached_network_image: ^2.5.1
