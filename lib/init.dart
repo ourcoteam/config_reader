@@ -31,9 +31,8 @@ Future<void> init({
   final config = await getConfig(staticConfig);
 
   final adMobId = config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
+  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id')?? 'ca-app-pub-3102006508276410~8783578315';
   final adMobIOSId = config.getMap('meta')?.getMap('ads')?.getMap('ios')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
-
-  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id');
   final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name');
   final appName = tryString(config.getMap('meta')?.getMap('app')?.get('appName'), staticConfig.get('appName'));
   final appBundleAndroid = staticConfig.get('appIdAndroid');
