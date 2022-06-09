@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^6.0.6
   dartz: ^0.9.2
   freezed_annotation: 0.12.0
+  flutter_funding_choices: ^0.1.1+3
   json_annotation: 3.1.1
   fluttertoast: ^7.1.1
   url_launcher: ^5.7.2
