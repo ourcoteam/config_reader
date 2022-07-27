@@ -87,7 +87,7 @@ dependencies:
   extended_text: ^4.0.0
   # flutter_widget_from_html: ^0.5.2+1
   flutter_widget_from_html_core: 0.5.1+4
-  #  webview_flutter: ^1.0.1
+  webview_flutter: ^1.0.1
   extended_nested_scroll_view: ^1.0.1
   extended_sliver: ^1.0.1
   keyboard_avoider: ^0.1.2
@@ -121,10 +121,10 @@ dependencies:
   flutter_tts: ^2.0.0
   html_unescape: ^1.0.2
   flutter_highlight: ^0.6.0
-  webview_flutter:
-    git:
-      url: https://github.com/ourcoteam/custom_web_view.git
-      ref: master
+//   webview_flutter:
+//     git:
+//       url: https://github.com/ourcoteam/custom_web_view.git
+//       ref: master
   rxdart: ^0.25.0
   flutter_app_badger: ^1.1.2
   app_tracking_transparency: ^1.1.0+1
