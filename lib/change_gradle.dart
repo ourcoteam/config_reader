@@ -89,6 +89,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.google.guava:guava:27.0.1-android'
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
 }
 ''');
 }
