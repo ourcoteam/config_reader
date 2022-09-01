@@ -19,6 +19,9 @@ import 'google_services_plist.dart';
 import 'info_plist.dart';
 import 'utils.dart';
 
+import 'package:config_reader/change_android_gradle.dart';
+import 'change_gradle.dart';
+
 final shell = Shell();
 
 Future<void> init({
