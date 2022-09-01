@@ -92,6 +92,10 @@ Future<void> init({
     keyId: keyId,
   );
 
+  
+  await changeAndroidGradle();
+  
+  
   await androidManifest(
     bundle: appBundleAndroid,
     baseUrl: baseUrl,
