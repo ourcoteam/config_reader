@@ -48,8 +48,9 @@ dependencies:
   dotted_border: ^1.0.6
   http:
   flutter_fawry_pay: ^0.0.1+1
-  youtube_player_flutter: ^7.0.0+7
+  # youtube_player_flutter: ^6.1.1
   flutter_youtube_view: ^1.1.10
+  youtube_player_webview: ^1.0.0+1
   font_awesome_flutter: ^8.11.0
   country_pickers: ^1.3.0
   flutter_multi_formatter: ^1.1.8
