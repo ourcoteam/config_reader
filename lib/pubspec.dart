@@ -36,7 +36,7 @@ dependencies:
   flutter_advanced_networkimage: ^0.7.0
   bloc: ^6.0.3
   flutter_bloc: ^6.0.6
-  audioplayers: ^0.17.0
+  assets_audio_player: ^2.0.15
   dartz: ^0.9.2
   freezed_annotation: 0.12.0
   flutter_funding_choices: ^0.1.1+3
