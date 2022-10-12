@@ -84,6 +84,31 @@ Future<void> androidManifest({
         android:label="$oldName"
         tools:replace="android:label,android:name"
         >
+          <receiver
+            android:name="com.github.florent37.assets_audio_player.notification.CustomMediaButtonReceiver"
+            android:exported="true" />
+           <receiver
+            android:name=".notification.NotificationActionReceiver"
+            android:exported="true" />
+           <receiver
+            android:name=".notification.CustomMediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+           </receiver>
+
+        <service
+            android:name=".notification.NotificationService"
+            android:enabled="true"
+            android:exported="true">
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+            -->
+        </service>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
