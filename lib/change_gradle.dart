@@ -93,6 +93,7 @@ dependencies {
     implementation 'com.google.guava:guava:27.0.1-android'
     implementation 'androidx.work:work-runtime-ktx:2.8.0-alpha03'
     implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
 }
 
 configurations.all {
