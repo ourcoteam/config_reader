@@ -132,6 +132,8 @@ dependencies:
   app_tracking_transparency: ^1.1.0+1
   google_mobile_ads: ^0.11.0+4
   flutter_math: 0.2.1
+  mailto: 1.1.0
+  
 dependency_overrides:
   flutter_svg: ^0.18.0
   build_runner_core: 6.1.7
