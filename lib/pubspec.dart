@@ -157,7 +157,7 @@ config_reader:
       url: https://github.com/ourcoteam/config_reader
       ref: master''':'''
 config_reader:
-    path: C:/Users/eldee/AndroidStudioProjects/config_reader'''
+    path: C:/Users/user/StudioProjects/config_reader'''
   }
   custom_flutter_launcher_name:
     git:

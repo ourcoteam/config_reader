@@ -82,7 +82,7 @@ Future<void> init({
   // await createSplash('FF0000');
   // await createIconsFromArguments([]);
 
-  await changeGradle(staticConfig['appIdAndroid']);
+  await changeGradle();
   // await changePackageName(staticConfig['appIdAndroid']);
   // await debugAndroidManifest(staticConfig['appIdAndroid']);
   // await profileAndroidManifest(staticConfig['appIdAndroid']);
