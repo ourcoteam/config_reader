@@ -54,6 +54,17 @@ Future<void> androidManifest({
       ? '\n\t\t\t\t\tandroid:pathPattern="${deepLinkPathPattern.startsWith('/') ? '' : '/'}$deepLinkPathPattern"'
       : '';
 
+  final inAppWebView = r'''
+  <provider
+            android:name="com.pichillilorenzo.flutter_inappwebview.InAppWebViewFileProvider"
+            android:authorities="${applicationId}.flutter_inappwebview.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>''';
+
   file.writeAsStringSync('''
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -217,6 +228,8 @@ Future<void> androidManifest({
         </activity>
         
         $notiIcon
+        
+        $inAppWebView
 
     </application>
 </manifest>
