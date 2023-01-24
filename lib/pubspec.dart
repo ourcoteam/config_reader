@@ -117,7 +117,7 @@ dependencies:
   firebase_auth: ^0.20.1
   firebase_core: ^0.7.0
 #  firebase_auth_oauth: ^0.2.0
-  # flutter_twitter_login: ^1.1.0
+  twitter_login: ^2.1.4
   badges: ^1.1.4
   notification_permissions: ^0.4.8
   flutter_tts: ^2.0.0
