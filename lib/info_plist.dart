@@ -120,6 +120,12 @@ Future<void> infoPlist({
   }
 
   final cFBundleURLTypesElement = XmlElement(XmlName('array'), [], [
+    XmlElement(XmlName('dict'), [], [
+      XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
+      XmlElement(XmlName('array'), [], [
+        XmlElement(XmlName('string'), [], [XmlText(bundle)]),
+      ]),
+    ]),
     if (stringNotNullOrEmpty(facebookId))
       XmlElement(XmlName('dict'), [], [
         XmlElement(XmlName('key'), [], [XmlText('CFBundleURLSchemes')]),
