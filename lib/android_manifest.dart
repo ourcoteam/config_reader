@@ -152,6 +152,16 @@ Future<void> androidManifest({
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="$oldBundle"
+                    />
+            </intent-filter>
             ${deeplink != null ? '''
             <!-- Deep Links -->
             <intent-filter>
