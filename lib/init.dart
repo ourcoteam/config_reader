@@ -7,6 +7,7 @@ import 'package:config_reader/utils/utils.dart';
 import 'package:config_reader/version.dart';
 import 'package:process_run/shell_run.dart';
 
+import 'android_bundle_id_file.dart';
 import 'android_manifest.dart';
 import 'app_file.dart';
 import 'config_reader.dart';
@@ -98,8 +99,9 @@ Future<void> init({
   
   await changeAndroidGradle();
 
+  await androidBundleIDFile(appBundleAndroid);
   await iosBundleIDFile(appBundleIOS);
-  
+
   await androidManifest(
     bundle: appBundleAndroid,
     baseUrl: baseUrl,
