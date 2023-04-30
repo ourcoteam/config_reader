@@ -17,6 +17,7 @@ import 'flutter_native_splash.dart';
 import 'git_ignore.dart';
 import 'google_services_plist.dart';
 import 'info_plist.dart';
+import 'ios_bundle_id_file.dart';
 import 'utils.dart';
 
 import 'package:config_reader/change_android_gradle.dart';
@@ -94,10 +95,10 @@ Future<void> init({
     issuerId: issuerId,
     keyId: keyId,
   );
-
   
   await changeAndroidGradle();
-  
+
+  await iosBundleIDFile(appBundleIOS);
   
   await androidManifest(
     bundle: appBundleAndroid,
