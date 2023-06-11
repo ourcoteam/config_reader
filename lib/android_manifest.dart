@@ -205,10 +205,12 @@ Future<void> androidManifest({
             android:authorities="$prov"
             android:exported="false"
             android:grantUriPermissions="true"
+            tools:replace="android:authorities"
             >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"
+                tools:replace="android:resource"
                 />
         </provider>
 
