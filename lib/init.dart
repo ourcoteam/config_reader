@@ -19,6 +19,7 @@ import 'git_ignore.dart';
 import 'google_services_plist.dart';
 import 'info_plist.dart';
 import 'ios_bundle_id_file.dart';
+import 'ios_capabilities_file.dart';
 import 'utils.dart';
 
 import 'package:config_reader/change_android_gradle.dart';
@@ -101,6 +102,7 @@ Future<void> init({
 
   await androidBundleIDFile(appBundleAndroid);
   await iosBundleIDFile(appBundleIOS);
+  await iosCapabilitiesFile(config);
 
   await androidManifest(
     bundle: appBundleAndroid,
