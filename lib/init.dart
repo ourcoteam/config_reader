@@ -52,7 +52,8 @@ Future<void> init({
   final keyId = config.getMap('meta')?.getMap('ios')?.get('keyId');
   final issuerId = config.getMap('meta')?.getMap('ios')?.get('issuerId');
   final authKey = config.getMap('meta')?.getMap('ios')?.get('authKey');
-  final nSUserTrackingUsageDescription = config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
+  final nSUserTrackingUsageDescription =
+      config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
 
   final String applink = tryString(config.getMap('meta')?.get('applink'), baseUrl);
   final String deeplink = config.getMap('meta')?.get('deeplink');
@@ -76,11 +77,12 @@ Future<void> init({
   final iosVersion = versionsMap?.get('ios');
   final androidVersion = versionsMap?.get('android');
 
-  await downloadImages(
-    splashUrl: splashUrl,
-    iconUrl: iconUrl,
-    notiIconUrl: notiIconUrl,
-  );
+  if (localConfig != true)
+    await downloadImages(
+      splashUrl: splashUrl,
+      iconUrl: iconUrl,
+      notiIconUrl: notiIconUrl,
+    );
 
   await colors(
     notiColor: notiColor,
@@ -101,7 +103,7 @@ Future<void> init({
     issuerId: issuerId,
     keyId: keyId,
   );
-  
+
   await changeAndroidGradle();
 
   await androidBundleIDFile(appBundleAndroid);
