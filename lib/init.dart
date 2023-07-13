@@ -17,6 +17,7 @@ import 'flutter_launcher_name.dart';
 import 'flutter_native_splash.dart';
 import 'git_ignore.dart';
 import 'google_services_plist.dart';
+import 'http_handler.dart';
 import 'info_plist.dart';
 import 'ios_bundle_id_file.dart';
 import 'ios_capabilities_file.dart';
@@ -33,6 +34,8 @@ Future<void> init({
   bool incrementIOS = false,
   bool incrementAndroid = false,
 }) async {
+  setHttpClient();
+
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig);
 
