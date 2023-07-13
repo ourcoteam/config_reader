@@ -16,7 +16,18 @@ Future<Map<String, dynamic>> getStaticConfig() async {
   return staticConfigJson;
 }
 
-Future<Map<String, dynamic>> getConfig(Map<String,dynamic> staticConfigJson) async {
+Future<Map<String, dynamic>> getConfig(Map<String,dynamic> staticConfigJson, {bool localConfig = false}) async {
+  if(localConfig == true){
+    final file = File('assets/config.json');
+    if (file.existsSync() == false) {
+      throw 'no config.json found';
+    }
+    final configContent = file.readAsStringSync();
+    final configJson = jsonDecode(configContent) as Map<String,dynamic>;
+
+    return configJson;
+  }
+
   String url;
   if (staticConfigJson?.containsKey('serviceUrl') ?? false) {
     url = staticConfigJson['serviceUrl'];

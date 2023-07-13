@@ -30,6 +30,7 @@ final shell = Shell();
 
 Future<void> init({
   bool local = false,
+  bool localConfig = false,
   bool addToGit = false,
   bool incrementIOS = false,
   bool incrementAndroid = false,
@@ -37,7 +38,7 @@ Future<void> init({
   setHttpClient();
 
   final staticConfig = await getStaticConfig();
-  final config = await getConfig(staticConfig);
+  final config = await getConfig(staticConfig, localConfig: localConfig);
 
   final adMobId = config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
   final adMobIOSId = config.getMap('meta')?.getMap('ads')?.getMap('ios')?.get('id') ?? adMobId;
