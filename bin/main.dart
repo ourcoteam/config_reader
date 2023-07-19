@@ -1,7 +1,7 @@
 import 'package:config_reader/init.dart';
 
 void main(List<String> args) {
-  print('v.1.0.48');
+  print('v.1.0.49');
   
   if(args.any((e) => e == '--v')){
     return;

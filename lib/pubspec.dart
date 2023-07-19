@@ -130,10 +130,14 @@ dependencies:
   rxdart: ^0.25.0
   flutter_app_badger: ^1.1.2
   app_tracking_transparency: ^1.1.0+1
-  google_mobile_ads: ^0.11.0+4
+#  google_mobile_ads: ^0.11.0+4
   flutter_math: 0.2.1
   mailto: 1.1.0
   flutter_inappwebview: ^4.0.0+4
+  custom_flutter_inappwebview:
+    git:
+      url: https://github.com/hosain-mohamed/custom_webview.git
+      ref: name_change
   
 dependency_overrides:
   flutter_svg: ^0.18.0
