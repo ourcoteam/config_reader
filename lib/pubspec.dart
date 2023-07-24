@@ -133,15 +133,14 @@ dependencies:
 #  google_mobile_ads: ^0.11.0+4
   flutter_math: 0.2.1
   mailto: 1.1.0
-  flutter_inappwebview: ^4.0.0+4
-  custom_flutter_inappwebview:
-    git:
-      url: https://github.com/hosain-mohamed/custom_webview.git
-      ref: name_change
   
 dependency_overrides:
   flutter_svg: ^0.18.0
   build_runner_core: 6.1.7
+  flutter_inappwebview:
+    git:
+      url: https://github.com/hosain-mohamed/custom_webview.git
+      ref: main
 #  analyzer: 0.39.11
 
 dev_dependencies:
