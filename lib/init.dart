@@ -170,5 +170,5 @@ Future<void> init({
     await commentGitIgnore(reverse: true);
   }
 
-  await fixMainActivityPackageName();
+  await fixMainActivityPackageName(appBundleAndroid);
 }
