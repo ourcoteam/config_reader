@@ -1,9 +1,9 @@
 import 'dart:io';
 
-fixMainActivityPackageName() async {
+Future fixMainActivityPackageName() async {
   final file = File('android/app/src/main/kotlin/discy/main/MainActivity.kt');
-  if (file.existsSync()) {
-    final content = [...file.readAsLinesSync()];
+  if (await file.exists()) {
+    final content = [...await file.readAsLines()];
     if (content.isNotEmpty) {
       final package = content.first;
       if (package.isNotEmpty && package.startsWith('package ')) {
@@ -16,10 +16,14 @@ fixMainActivityPackageName() async {
               parts[i] = r'`in`';
             }
           }
+          print(parts);
           final newBundle = parts.join('.');
+          print(newBundle);
           final newPackage = 'package $newBundle';
+          print(newPackage);
           content[0] = newPackage;
-          file.writeAsStringSync(content.join('\n'));
+          print(content[0]);
+          await file.writeAsString(content.join('\n'));
         }
       }
     }
