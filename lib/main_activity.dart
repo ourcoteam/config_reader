@@ -13,7 +13,7 @@ fixMainActivityPackageName() async {
           for (int i = 0; i < parts.length; i++) {
             final part = parts[i];
             if (part == 'in') {
-              parts[i] = '`in`';
+              parts[i] = r'`in`';
             }
           }
           final newBundle = parts.join('.');
