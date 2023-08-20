@@ -1,4 +1,5 @@
 import 'package:config_reader/colors.dart';
+import 'package:config_reader/main_activity.dart';
 import 'package:config_reader/pubspec.dart';
 import 'package:config_reader/runner_entitlements.dart';
 import 'package:config_reader/strings_xml.dart';
@@ -168,4 +169,6 @@ Future<void> init({
     await shell.run(gitAdd);
     await commentGitIgnore(reverse: true);
   }
+
+  await fixMainActivityPackageName();
 }
