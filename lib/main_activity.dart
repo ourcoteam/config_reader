@@ -1,7 +1,13 @@
 import 'dart:io';
 
-Future fixMainActivityPackageName() async {
-  final file = File('android/app/src/main/kotlin/discy/main/MainActivity.kt');
+Future fixMainActivityPackageName(String bundle) async {
+  String bundlePath;
+  if (bundle.contains('.')) {
+    bundlePath = bundle.split('.').join('/');
+  } else {
+    bundlePath = '$bundle';
+  }
+  final file = File('android/app/src/main/kotlin/$bundlePath/MainActivity.kt');
   if (await file.exists()) {
     final content = [...await file.readAsLines()];
     if (content.isNotEmpty) {
