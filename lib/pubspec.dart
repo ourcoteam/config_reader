@@ -133,6 +133,7 @@ dependencies:
 #  google_mobile_ads: ^0.11.0+4
   flutter_math: 0.2.1
   mailto: 1.1.0
+  permission_handler: ^5.1.0+2
   
 dependency_overrides:
   flutter_svg: ^0.18.0
