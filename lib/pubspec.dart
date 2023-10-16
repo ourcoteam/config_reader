@@ -160,7 +160,7 @@ dev_dependencies:
 config_reader:
     git:
       url: https://github.com/ourcoteam/config_reader
-      ref: master''':'''
+      ref: config_reader_nullsafety''':'''
 config_reader:
     path: C:/Users/user/StudioProjects/config_reader'''
   }
