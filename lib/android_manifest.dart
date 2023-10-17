@@ -82,8 +82,7 @@ Future<void> androidManifest({
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="$oldBundle"
-    >
+    package="$oldBundle">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
            calls FlutterMain.startInitialization(this); in its onCreate method.
