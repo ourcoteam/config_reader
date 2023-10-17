@@ -95,9 +95,9 @@ Future<void> infoPlist({
   } else {
     dict()
         ?.children
-        .removeAt(dict()?.children.indexOf(cFBundleIdentifierKey) ?? 0 + 1);
-    dict()?.children[dict()?.children.indexOf(cFBundleIdentifierKey) ?? 0 + 1] =
-        cFBundleIdentifierElement;
+        .removeAt((dict()?.children.indexOf(cFBundleIdentifierKey) ?? 0) + 1);
+    dict()?.children[(dict()?.children.indexOf(cFBundleIdentifierKey) ?? 0) +
+        1] = cFBundleIdentifierElement;
   }
 
   final facebookAppIDKey = dict()?.children.firstWhereOrNull(
