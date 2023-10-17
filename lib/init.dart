@@ -1,3 +1,4 @@
+import 'package:config_reader/change_gradle_properties.dart';
 import 'package:config_reader/colors.dart';
 import 'package:config_reader/main_activity.dart';
 import 'package:config_reader/pubspec.dart';
@@ -41,22 +42,39 @@ Future<void> init({
   final staticConfig = await getStaticConfig();
   final config = await getConfig(staticConfig, localConfig: localConfig);
 
-  final adMobId = config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ?? 'ca-app-pub-3102006508276410~8783578315';
-  final adMobIOSId = config.getMap('meta')?.getMap('ads')?.getMap('ios')?.get('id') ?? adMobId;
-  final facebookId = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('id');
-  final facebookName = config.getMap('meta')?.getMap('socialLogin')?.getMap('facebook')?.get('name');
-  final appName = tryString(config.getMap('meta')?.getMap('app')?.get('appName'), staticConfig.get('appName'));
+  final adMobId =
+      config.getMap('meta')?.getMap('ads')?.getMap('google')?.get('id') ??
+          'ca-app-pub-3102006508276410~8783578315';
+  final adMobIOSId =
+      config.getMap('meta')?.getMap('ads')?.getMap('ios')?.get('id') ?? adMobId;
+  final facebookId = config
+      .getMap('meta')
+      ?.getMap('socialLogin')
+      ?.getMap('facebook')
+      ?.get('id');
+  final facebookName = config
+      .getMap('meta')
+      ?.getMap('socialLogin')
+      ?.getMap('facebook')
+      ?.get('name');
+  final appName = tryString(
+      config.getMap('meta')?.getMap('app')?.get('appName'),
+      staticConfig.get('appName'));
   final appBundleAndroid = staticConfig.get('appIdAndroid');
   final appBundleIOS = staticConfig.get('appIdIOS');
-  final baseUrl = config.getMap('meta')?.get('baseUrl') ?? staticConfig.get('serviceUrl') ?? staticConfig.get('baseUrl');
+  final baseUrl = config.getMap('meta')?.get('baseUrl') ??
+      staticConfig.get('serviceUrl') ??
+      staticConfig.get('baseUrl');
 
   final keyId = config.getMap('meta')?.getMap('ios')?.get('keyId');
   final issuerId = config.getMap('meta')?.getMap('ios')?.get('issuerId');
   final authKey = config.getMap('meta')?.getMap('ios')?.get('authKey');
   final nSUserTrackingUsageDescription =
-      config.getMap('meta')?.getMap('ios')?.get('att') ?? 'This identifier will be used to deliver personalized ads to you.';
+      config.getMap('meta')?.getMap('ios')?.get('att') ??
+          'This identifier will be used to deliver personalized ads to you.';
 
-  final String applink = tryString(config.getMap('meta')?.get('applink'), baseUrl);
+  final String applink =
+      tryString(config.getMap('meta')?.get('applink'), baseUrl);
   final String deeplink = config.getMap('meta')?.get('deeplink');
 
   // final adMobIdAndroid = config.getMap('meta')?.getMap('adMob')?.get('androidID') ?? 'GAD_Android';
@@ -67,12 +85,15 @@ Future<void> init({
 
   final iconUrl = config.getMap('meta')?.getMap('app')?.get('appIcon');
 
-  final notiIconUrl = config.getMap('meta')?.getMap('notifications')?.get('icon');
-  final notiColor = config.getMap('meta')?.getMap('notifications')?.get('color');
+  final notiIconUrl =
+      config.getMap('meta')?.getMap('notifications')?.get('icon');
+  final notiColor =
+      config.getMap('meta')?.getMap('notifications')?.get('color');
 
   final versionsMap = await versions();
   if (incrementIOS && versionsMap == null) {
-    print('Please set the last ios version to CFBundleShortVersionString in ios/Runner/Info.plist file');
+    print(
+        'Please set the last ios version to CFBundleShortVersionString in ios/Runner/Info.plist file');
     return;
   }
   final iosVersion = versionsMap?.get('ios');
@@ -93,6 +114,8 @@ Future<void> init({
   // await createIconsFromArguments([]);
 
   await changeGradle();
+
+  await changeGradleProperties();
   // await changePackageName(staticConfig['appIdAndroid']);
   // await debugAndroidManifest(staticConfig['appIdAndroid']);
   // await profileAndroidManifest(staticConfig['appIdAndroid']);
@@ -154,7 +177,8 @@ Future<void> init({
   final splash = 'flutter pub pub run flutter_native_splash:create';
   final icons = 'flutter pub run flutter_launcher_icons:main';
   final name = 'flutter pub run custom_flutter_launcher_name:main';
-  final bundle = 'flutter pub run change_app_package_name:main $appBundleAndroid';
+  final bundle =
+      'flutter pub run change_app_package_name:main $appBundleAndroid';
   final gitAdd = 'git add .';
 
   await shell.run(clean);
