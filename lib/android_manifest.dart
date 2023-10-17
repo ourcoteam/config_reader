@@ -105,7 +105,7 @@ Future<void> androidManifest({
     </queries>
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="\${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="$oldName"
         tools:replace="android:label,android:name"
