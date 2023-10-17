@@ -17,7 +17,7 @@ description: A new Flutter project.
 ${version != null ? "version: $version" : lastAndroidVersionString}
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
   flutter:
