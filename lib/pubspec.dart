@@ -156,7 +156,7 @@ config_reader:
   custom_flutter_launcher_name:
     git:
       url: https://github.com/ourcoteam/custom_flutter_launcher_name
-      ref: master
+      ref: custom_flutter_launcher_name_nullsafety
 
 flutter:
   uses-material-design: true
