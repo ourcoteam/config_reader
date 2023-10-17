@@ -1,20 +1,20 @@
 import 'dart:io';
 
-Future<void> changeAndroidGradle()async{
+Future<void> changeAndroidGradle() async {
   final file = File('android/build.gradle');
-  if(file.existsSync()==false){
+  if (file.existsSync() == false) {
     file.createSync();
   }
   file.writeAsStringSync('''
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-classpath 'com.android.tools.build:gradle:3.6.4'
+classpath 'com.android.tools.build:gradle:7.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:\$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'

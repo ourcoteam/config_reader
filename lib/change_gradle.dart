@@ -92,22 +92,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:\$kotlin_version"
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation platform('com.google.firebase:firebase-bom')
-    implementation 'com.google.firebase:firebase-iid:21.1.0'
-    implementation 'com.google.guava:guava:27.0.1-android'
-    implementation 'androidx.work:work-runtime-ktx:2.8.0-alpha03'
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
-}
 
-configurations.all {
-    resolutionStrategy {
-        force 'androidx.core:core:1.6.0'
-        force 'androidx.core:core-ktx:1.6.0'
-    }
 }
 ''');
 }
