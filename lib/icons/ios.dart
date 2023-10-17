@@ -8,8 +8,8 @@ import 'constants.dart';
 class IosIconTemplate {
   IosIconTemplate({this.size, this.name});
 
-  final String name;
-  final int size;
+  final String? name;
+  final int? size;
 }
 
 List<IosIconTemplate> iosIcons = <IosIconTemplate>[
@@ -32,14 +32,16 @@ List<IosIconTemplate> iosIcons = <IosIconTemplate>[
 
 void createIcons(Map<String, dynamic> config, String flavor) {
   final String filePath = config['image_path_ios'] ?? config['image_path'];
-  final Image image = decodeImage(File(filePath).readAsBytesSync());
+  final Image? image = decodeImage(File(filePath).readAsBytesSync());
   String iconName;
   final dynamic iosConfig = config['ios'];
   if (flavor != null) {
     final String catalogName = 'AppIcon-$flavor';
     printStatus('Building iOS launcher icon for $flavor');
     for (IosIconTemplate template in iosIcons) {
-      saveNewIcons(template, image, catalogName);
+      if (image != null) {
+        saveNewIcons(template, image, catalogName);
+      }
     }
     iconName = iosDefaultIconName;
     changeIosLauncherIcon(catalogName, flavor);
@@ -50,7 +52,9 @@ void createIcons(Map<String, dynamic> config, String flavor) {
     final String newIconName = iosConfig;
     printStatus('Adding new iOS launcher icon');
     for (IosIconTemplate template in iosIcons) {
-      saveNewIcons(template, image, newIconName);
+      if (image != null) {
+        saveNewIcons(template, image, newIconName);
+      }
     }
     iconName = newIconName;
     changeIosLauncherIcon(iconName, flavor);
@@ -61,7 +65,9 @@ void createIcons(Map<String, dynamic> config, String flavor) {
   else {
     printStatus('Overwriting default iOS launcher icon with new icon');
     for (IosIconTemplate template in iosIcons) {
-      overwriteDefaultIcons(template, image);
+      if (image != null) {
+        overwriteDefaultIcons(template, image);
+      }
     }
     iconName = iosDefaultIconName;
     changeIosLauncherIcon('AppIcon', flavor);
@@ -73,7 +79,10 @@ void createIcons(Map<String, dynamic> config, String flavor) {
 /// https://github.com/fluttercommunity/flutter_launcher_icons/issues/101#issuecomment-495528733
 void overwriteDefaultIcons(IosIconTemplate template, Image image) {
   final Image newFile = createResizedImage(template, image);
-  File(iosDefaultIconFolder + iosDefaultIconName + template.name + '.png')
+  File(iosDefaultIconFolder +
+      iosDefaultIconName +
+      (template.name ?? "") +
+      '.png')
     ..writeAsBytesSync(encodePng(newFile));
 }
 
@@ -83,7 +92,7 @@ void overwriteDefaultIcons(IosIconTemplate template, Image image) {
 void saveNewIcons(IosIconTemplate template, Image image, String newIconName) {
   final String newIconFolder = iosAssetFolder + newIconName + '.appiconset/';
   final Image newFile = createResizedImage(template, image);
-  File(newIconFolder + newIconName + template.name + '.png')
+  File(newIconFolder + newIconName + (template.name ?? "") + '.png')
       .create(recursive: true)
       .then((File file) {
     file.writeAsBytesSync(encodePng(newFile));
@@ -91,7 +100,7 @@ void saveNewIcons(IosIconTemplate template, Image image, String newIconName) {
 }
 
 Image createResizedImage(IosIconTemplate template, Image image) {
-  if (image.width >= template.size) {
+  if (image.width >= (template.size ?? 0)) {
     return copyResize(image,
         width: template.size,
         height: template.size,
@@ -109,7 +118,7 @@ Future<void> changeIosLauncherIcon(String iconName, String flavor) async {
   final List<String> lines = await iOSConfigFile.readAsLines();
 
   bool onConfigurationSection = false;
-  String currentConfig;
+  String? currentConfig;
 
   for (int x = 0; x < lines.length; x++) {
     String line = lines[x];
@@ -159,13 +168,13 @@ String generateContentsFileAsString(String newIconName) {
 class ContentsImageObject {
   ContentsImageObject({this.size, this.idiom, this.filename, this.scale});
 
-  final String size;
-  final String idiom;
-  final String filename;
-  final String scale;
+  final String? size;
+  final String? idiom;
+  final String? filename;
+  final String? scale;
 
-  Map<String, String> toJson() {
-    return <String, String>{
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
       'size': size,
       'idiom': idiom,
       'filename': filename,
@@ -177,8 +186,8 @@ class ContentsImageObject {
 class ContentsInfoObject {
   ContentsInfoObject({this.version, this.author});
 
-  final int version;
-  final String author;
+  final int? version;
+  final String? author;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -188,8 +197,8 @@ class ContentsInfoObject {
   }
 }
 
-List<Map<String, String>> createImageList(String fileNamePrefix) {
-  final List<Map<String, String>> imageList = <Map<String, String>>[
+List<Map<String, dynamic>> createImageList(String fileNamePrefix) {
+  final List<Map<String, dynamic>> imageList = <Map<String, dynamic>>[
     ContentsImageObject(
             size: '20x20',
             idiom: 'iphone',

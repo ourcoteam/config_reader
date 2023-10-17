@@ -20,7 +20,8 @@ import 'package:xml/xml.dart';
 /// * <dict> to [Map].
 Object parseXml(String xml) {
   var doc = XmlDocument.parse(xml);
-  return _handleElem(doc.rootElement.children.where(_isElemet).first);
+  return _handleElem(
+      doc.rootElement.children.where(_isElemet).first as XmlElement);
 }
 
 _handleElem(XmlElement elem) {
@@ -40,7 +41,10 @@ _handleElem(XmlElement elem) {
     case 'data':
       return new Uint8List.fromList(base64Decode(elem.text));
     case 'array':
-      return elem.children.where(_isElemet).map((e) => _handleElem(e)).toList();
+      return elem.children
+          .where(_isElemet)
+          .map((e) => _handleElem(e as XmlElement))
+          .toList();
     case 'dict':
       return _handleDict(elem);
   }
@@ -48,8 +52,12 @@ _handleElem(XmlElement elem) {
 
 Map _handleDict(XmlElement elem) {
   var children = elem.children.where(_isElemet);
-  var key = children.where((XmlNode elem) => (elem as XmlElement).name.local == 'key').map((elem) => elem.text);
-  var values = children.where((elem) => (elem as XmlElement).name.local != 'key').map((e) => _handleElem(e));
+  var key = children
+      .where((XmlNode elem) => (elem as XmlElement).name.local == 'key')
+      .map((elem) => elem.text);
+  var values = children
+      .where((elem) => (elem as XmlElement).name.local != 'key')
+      .map((e) => _handleElem(e as XmlElement));
   return new Map.fromIterables(key, values);
 }
 

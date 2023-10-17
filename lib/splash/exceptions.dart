@@ -1,6 +1,6 @@
 class NoConfigFoundException implements Exception {
   const NoConfigFoundException([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -12,7 +12,7 @@ class NoConfigFoundException implements Exception {
 
 class InvalidConfigException implements Exception {
   const InvalidConfigException([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -24,7 +24,7 @@ class InvalidConfigException implements Exception {
 
 class NoImageFileFoundException implements Exception {
   const NoImageFileFoundException([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -36,7 +36,7 @@ class NoImageFileFoundException implements Exception {
 
 class CantFindMainActivityPath implements Exception {
   const CantFindMainActivityPath([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -48,7 +48,7 @@ class CantFindMainActivityPath implements Exception {
 
 class CantFindAppDelegatePath implements Exception {
   const CantFindAppDelegatePath([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -60,7 +60,7 @@ class CantFindAppDelegatePath implements Exception {
 
 class InvalidNativeFile implements Exception {
   const InvalidNativeFile([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -72,7 +72,7 @@ class InvalidNativeFile implements Exception {
 
 class LaunchScreenStoryboardModified implements Exception {
   const LaunchScreenStoryboardModified([this.message]);
-  final String message;
+  final String? message;
 
   @override
   String toString() {

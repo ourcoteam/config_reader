@@ -22,7 +22,7 @@ List<String> getFlavors() {
       final name = path.basename(item.path);
       final match = RegExp(flavorConfigFilePattern).firstMatch(name);
       if (match != null) {
-        flavors.add(match.group(1));
+        flavors.add(match.group(1) ?? "");
       }
     }
   }
@@ -33,7 +33,8 @@ Future<void> createIconsFromArguments(List<String> arguments) async {
   final ArgParser parser = ArgParser(allowTrailingOptions: true);
   parser.addFlag(helpFlag, abbr: 'h', help: 'Usage help', negatable: false);
   // Make default null to differentiate when it is explicitly set
-  parser.addOption(fileOption, abbr: 'f', help: 'Config file (default: $defaultConfigFile)');
+  parser.addOption(fileOption,
+      abbr: 'f', help: 'Config file (default: $defaultConfigFile)');
   final ArgResults argResults = parser.parse(arguments);
 
   if (argResults[helpFlag]) {
@@ -47,10 +48,11 @@ Future<void> createIconsFromArguments(List<String> arguments) async {
   var hasFlavors = flavors.isNotEmpty;
 
   // Load the config file
-  final Map<String, dynamic> yamlConfig = loadConfigFileFromArgResults(argResults, verbose: true);
+  final Map<String, dynamic>? yamlConfig =
+      loadConfigFileFromArgResults(argResults, verbose: true);
 
   // Create icons
-  if (!hasFlavors) {
+  if (!hasFlavors && yamlConfig != null) {
     try {
       createIconsFromConfig(yamlConfig);
     } catch (e) {
@@ -63,7 +65,8 @@ Future<void> createIconsFromArguments(List<String> arguments) async {
     try {
       for (String flavor in flavors) {
         print('\nFlavor: $flavor');
-        final Map<String, dynamic> yamlConfig = loadConfigFile(flavorConfigFile(flavor), flavorConfigFile(flavor));
+        final Map<String, dynamic> yamlConfig =
+            loadConfigFile(flavorConfigFile(flavor), flavorConfigFile(flavor));
         await createIconsFromConfig(yamlConfig, flavor);
       }
     } catch (e) {
@@ -75,7 +78,8 @@ Future<void> createIconsFromArguments(List<String> arguments) async {
   }
 }
 
-Future<void> createIconsFromConfig(Map<String, dynamic> config, [String flavor]) async {
+Future<void> createIconsFromConfig(Map<String, dynamic> config,
+    [String? flavor]) async {
   if (!isImagePathInConfig(config)) {
     throw const InvalidConfigException(errorMissingImagePath);
   }
@@ -85,23 +89,26 @@ Future<void> createIconsFromConfig(Map<String, dynamic> config, [String flavor])
 
   if (isNeedingNewAndroidIcon(config) || hasAndroidAdaptiveConfig(config)) {
     final int minSdk = android_launcher_icons.minSdk();
-    if (minSdk < 26 && hasAndroidAdaptiveConfig(config) && !hasAndroidConfig(config)) {
+    if (minSdk < 26 &&
+        hasAndroidAdaptiveConfig(config) &&
+        !hasAndroidConfig(config)) {
       throw const InvalidConfigException(errorMissingRegularAndroid);
     }
   }
 
-  if (isNeedingNewAndroidIcon(config)) {
+  if (isNeedingNewAndroidIcon(config) && flavor != null) {
     android_launcher_icons.createDefaultIcons(config, flavor);
   }
-  if (hasAndroidAdaptiveConfig(config)) {
+  if (hasAndroidAdaptiveConfig(config) && flavor != null) {
     android_launcher_icons.createAdaptiveIcons(config, flavor);
   }
-  if (isNeedingNewIOSIcon(config)) {
+  if (isNeedingNewIOSIcon(config) && flavor != null) {
     ios_launcher_icons.createIcons(config, flavor);
   }
 }
 
-Map<String, dynamic> loadConfigFileFromArgResults(ArgResults argResults, {bool verbose}) {
+Map<String, dynamic>? loadConfigFileFromArgResults(ArgResults argResults,
+    {bool? verbose}) {
   verbose ??= false;
   final String configFile = argResults[fileOption];
   final String fileOptionResult = argResults[fileOption];
@@ -172,11 +179,13 @@ Map<String, dynamic> loadConfigFile(String path, String fileOptionResult) {
 
 bool isImagePathInConfig(Map<String, dynamic> flutterIconsConfig) {
   return flutterIconsConfig.containsKey('image_path') ||
-      (flutterIconsConfig.containsKey('image_path_android') && flutterIconsConfig.containsKey('image_path_ios'));
+      (flutterIconsConfig.containsKey('image_path_android') &&
+          flutterIconsConfig.containsKey('image_path_ios'));
 }
 
 bool hasPlatformConfig(Map<String, dynamic> flutterIconsConfig) {
-  return hasAndroidConfig(flutterIconsConfig) || hasIOSConfig(flutterIconsConfig);
+  return hasAndroidConfig(flutterIconsConfig) ||
+      hasIOSConfig(flutterIconsConfig);
 }
 
 bool hasAndroidConfig(Map<String, dynamic> flutterLauncherIcons) {
@@ -184,7 +193,8 @@ bool hasAndroidConfig(Map<String, dynamic> flutterLauncherIcons) {
 }
 
 bool isNeedingNewAndroidIcon(Map<String, dynamic> flutterLauncherIconsConfig) {
-  return hasAndroidConfig(flutterLauncherIconsConfig) && flutterLauncherIconsConfig['android'] != false;
+  return hasAndroidConfig(flutterLauncherIconsConfig) &&
+      flutterLauncherIconsConfig['android'] != false;
 }
 
 bool hasAndroidAdaptiveConfig(Map<String, dynamic> flutterLauncherIconsConfig) {
@@ -198,5 +208,6 @@ bool hasIOSConfig(Map<String, dynamic> flutterLauncherIconsConfig) {
 }
 
 bool isNeedingNewIOSIcon(Map<String, dynamic> flutterLauncherIconsConfig) {
-  return hasIOSConfig(flutterLauncherIconsConfig) && flutterLauncherIconsConfig['ios'] != false;
+  return hasIOSConfig(flutterLauncherIconsConfig) &&
+      flutterLauncherIconsConfig['ios'] != false;
 }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:config_reader/utils/utils.dart';
 
 Future runnerEntitlements({
-  String applink,
+  String? applink,
 }) async {
   final file = File('ios/Runner/Runner.entitlements');
   if (file.existsSync() == false) {
@@ -23,7 +23,7 @@ Future runnerEntitlements({
 	<key>com.apple.developer.associated-domains</key>
 	${stringNotNullOrEmpty(applink) ? '''
 <array>
-      <string>applinks:${Uri.parse(applink).host}</string>
+      <string>applinks:${Uri.parse(applink ?? "").host}</string>
     </array>''' : ''}
     <key>com.apple.developer.applesignin</key>
     <array>

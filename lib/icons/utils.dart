@@ -22,6 +22,6 @@ void printStatus(String message) {
   print('• $message');
 }
 
-String generateError(Exception e, String error) {
+String generateError(Exception e, String? error) {
   return '\n✗ ERROR: ${(e).runtimeType.toString()} \n$error';
 }

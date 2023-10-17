@@ -1,9 +1,9 @@
 import 'dart:io';
 
 Future tempJson({
-  String keyId,
-  String issuerId,
-  String authKey,
+  String? keyId,
+  String? issuerId,
+  String? authKey,
 }) async {
   if (keyId == null || issuerId == null || authKey == null) return;
 

@@ -1,15 +1,16 @@
 import 'dart:io';
 
-Future<void> changeGradle()async{
+Future<void> changeGradle() async {
   final file = File('android/app/build.gradle');
-  if(file.existsSync()==false){
+  if (file.existsSync() == false) {
     file.createSync();
   }
 
   //get old bundle id
-  final bundle = RegExp('applicationId "(.*)"', caseSensitive: true, multiLine: false)
-      .firstMatch(file.readAsStringSync())
-      .group(1);
+  final bundle =
+      RegExp('applicationId "(.*)"', caseSensitive: true, multiLine: false)
+          .firstMatch(file.readAsStringSync())
+          ?.group(1);
 
   file.writeAsStringSync('''
 def localProperties = new Properties()

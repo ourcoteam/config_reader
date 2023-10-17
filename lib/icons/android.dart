@@ -6,7 +6,7 @@ import 'custom_exceptions.dart';
 import 'constants.dart' as constants;
 
 class AndroidIconTemplate {
-  AndroidIconTemplate({this.size, this.directoryName});
+  AndroidIconTemplate({required this.size, required this.directoryName});
 
   final String directoryName;
   final int size;
@@ -32,7 +32,7 @@ void createDefaultIcons(
     Map<String, dynamic> flutterLauncherIconsConfig, String flavor) {
   printStatus('Creating default icons Android');
   final String filePath = getAndroidIconPath(flutterLauncherIconsConfig);
-  final Image image = decodeImage(File(filePath).readAsBytesSync());
+  final Image? image = decodeImage(File(filePath).readAsBytesSync());
   final File androidManifestFile = File(constants.androidManifestFile);
   if (isCustomAndroidFile(flutterLauncherIconsConfig)) {
     printStatus('Adding a new Android launcher icon');
@@ -40,16 +40,22 @@ void createDefaultIcons(
     isAndroidIconNameCorrectFormat(iconName);
     final String iconPath = '$iconName.png';
     for (AndroidIconTemplate template in androidIcons) {
-      saveNewImages(template, image, iconPath, flavor);
+      if (image != null) {
+        saveNewImages(template, image, iconPath, flavor);
+      }
     }
     overwriteAndroidManifestWithNewLauncherIcon(iconName, androidManifestFile);
   } else {
-    printStatus('Overwriting the default Android launcher icon with a new icon');
+    printStatus(
+        'Overwriting the default Android launcher icon with a new icon');
     for (AndroidIconTemplate template in androidIcons) {
-      overwriteExistingIcons(
-          template, image, constants.androidFileName, flavor);
+      if (image != null) {
+        overwriteExistingIcons(
+            template, image, constants.androidFileName, flavor);
+      }
     }
-    overwriteAndroidManifestWithNewLauncherIcon(constants.androidDefaultIconName, androidManifestFile);
+    overwriteAndroidManifestWithNewLauncherIcon(
+        constants.androidDefaultIconName, androidManifestFile);
   }
 }
 
@@ -72,13 +78,15 @@ void createAdaptiveIcons(
       flutterLauncherIconsConfig['adaptive_icon_background'];
   final String foregroundImagePath =
       flutterLauncherIconsConfig['adaptive_icon_foreground'];
-  final Image foregroundImage =
+  final Image? foregroundImage =
       decodeImage(File(foregroundImagePath).readAsBytesSync());
 
   // Create adaptive icon foreground images
   for (AndroidIconTemplate androidIcon in adaptiveForegroundIcons) {
-    overwriteExistingIcons(androidIcon, foregroundImage,
-        constants.androidAdaptiveForegroundFileName, flavor);
+    if (foregroundImage != null) {
+      overwriteExistingIcons(androidIcon, foregroundImage,
+          constants.androidAdaptiveForegroundFileName, flavor);
+    }
   }
 
   // Create adaptive icon background
@@ -105,7 +113,8 @@ void updateColorsXmlFile(String backgroundConfig, String flavor) {
     updateColorsFile(colorsXml, backgroundConfig);
   } else {
     printStatus('No colors.xml file found in your Android project');
-    printStatus('Creating colors.xml file and adding it to your Android project');
+    printStatus(
+        'Creating colors.xml file and adding it to your Android project');
     createNewColorsFile(backgroundConfig, flavor);
   }
 }
@@ -137,13 +146,15 @@ void createAdaptiveIconMipmapXmlFile(
 void createAdaptiveBackgrounds(Map<String, dynamic> yamlConfig,
     String adaptiveIconBackgroundImagePath, String flavor) {
   final String filePath = adaptiveIconBackgroundImagePath;
-  final Image image = decodeImage(File(filePath).readAsBytesSync());
+  final Image? image = decodeImage(File(filePath).readAsBytesSync());
 
   // creates a png image (ic_adaptive_background.png) for the adaptive icon background in each of the locations
   // it is required
   for (AndroidIconTemplate androidIcon in adaptiveForegroundIcons) {
-    saveNewImages(androidIcon, image,
-        constants.androidAdaptiveBackgroundFileName, flavor);
+    if (image != null) {
+      saveNewImages(androidIcon, image,
+          constants.androidAdaptiveBackgroundFileName, flavor);
+    }
   }
 
   // Creates the xml file required for the adaptive launcher icon

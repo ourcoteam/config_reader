@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:xml/xml.dart';
+import 'package:collection/collection.dart';
 
 Future colors({
-  String notiColor,
+  String? notiColor,
 }) async {
   if (notiColor == null) return;
 
-  if(!notiColor.startsWith('#')){
+  if (!notiColor.startsWith('#')) {
     notiColor = '#$notiColor';
   }
 
@@ -17,7 +18,8 @@ Future colors({
   if (contents.contains('noti_color')) {
     xml
         .findAllElements('color')
-        .firstWhere((element) => element.attributes.any((e) => e.name.local == 'noti_color'), orElse: () => null)
+        .firstWhereOrNull((element) =>
+            element.attributes.any((e) => e.name.local == 'noti_color'))
         ?.innerText = notiColor;
   } else {
     xml.rootElement.children.add(

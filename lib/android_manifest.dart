@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:xml/xml.dart';
+import 'package:collection/collection.dart';
 
 Future<void> androidManifest({
-  String bundle,
-  String baseUrl,
-  String name,
-  String adMobId,
-  String deeplink,
-  String applink,
+  String? bundle,
+  String? baseUrl,
+  String? name,
+  String? adMobId,
+  String? deeplink,
+  String? applink,
 }) async {
   final path = 'android/app/src/main';
 
@@ -21,7 +22,8 @@ Future<void> androidManifest({
 
   final notiFile = File('android/app/src/main/res/drawable/noti_icon.png');
   final colorsFile = File('android/app/src/main/res/values/colors.xml');
-  if (notiFile.existsSync() && colorsFile.readAsStringSync().contains('noti_color')) {
+  if (notiFile.existsSync() &&
+      colorsFile.readAsStringSync().contains('noti_color')) {
     notiIcon = '''
 <meta-data
           android:name="com.google.firebase.messaging.default_notification_icon"
@@ -35,9 +37,17 @@ Future<void> androidManifest({
 
   final xml = XmlDocument.parse(file.readAsStringSync());
   final man = xml.rootElement;
-  final oldBundle = man.attributes.firstWhere((e) => e.name.local == 'package', orElse: () => null)?.value ?? 'null';
+  final oldBundle = man.attributes
+          .firstWhereOrNull((e) => e.name.local == 'package')
+          ?.value ??
+      'null';
   final app = man.getElement('application');
-  final oldName = app.attributes.firstWhere((e) => e.name.local == 'label', orElse: () => null)?.value ?? 'null';
+  final oldName = app?.attributes
+          .firstWhereOrNull(
+            (e) => e.name.local == 'label',
+          )
+          ?.value ??
+      'null';
 
   final prov = r'${applicationId}.provider';
 
@@ -45,12 +55,15 @@ Future<void> androidManifest({
   final deepLinkScheme = deeplink != null ? Uri.parse(deeplink).scheme : '';
   final deepLinkPathPattern = deeplink != null ? Uri.parse(deeplink).path : '';
 
-  final appLinkHost = Uri.parse(applink).host;
-  final appLinkPathPattern = Uri.parse(applink).path;
+  final appLinkHost = Uri.parse(applink ?? "").host;
+  final appLinkPathPattern = Uri.parse(applink ?? "").path;
 
-  final applinkPathPatternElement =
-      appLinkPathPattern != null && appLinkPathPattern.isNotEmpty ? '\n\t\t\t\t\tandroid:pathPattern="${appLinkPathPattern.startsWith('/') ? '' : '/'}$appLinkPathPattern"' : '';
-  final deeplinkPathPatternElement = deepLinkPathPattern != null && deepLinkPathPattern.isNotEmpty
+  final applinkPathPatternElement = appLinkPathPattern != null &&
+          appLinkPathPattern.isNotEmpty
+      ? '\n\t\t\t\t\tandroid:pathPattern="${appLinkPathPattern.startsWith('/') ? '' : '/'}$appLinkPathPattern"'
+      : '';
+  final deeplinkPathPatternElement = deepLinkPathPattern != null &&
+          deepLinkPathPattern.isNotEmpty
       ? '\n\t\t\t\t\tandroid:pathPattern="${deepLinkPathPattern.startsWith('/') ? '' : '/'}$deepLinkPathPattern"'
       : '';
 

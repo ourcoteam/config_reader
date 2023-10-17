@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:http/http.dart';
 
 Future<void> downloadImages({
-  String splashUrl,
-  String iconUrl,
-  String notiIconUrl,
+  String? splashUrl,
+  String? iconUrl,
+  String? notiIconUrl,
 }) async {
   await Future.wait([
     if (splashUrl != null) downloadSplash(splashUrl),
@@ -15,7 +15,7 @@ Future<void> downloadImages({
 }
 
 Future<void> downloadSplash(String splashUrl) async {
-  final splashResponse = await get(splashUrl);
+  final splashResponse = await get(Uri.parse(splashUrl));
   final splashFile = File('assets/images/discy_splash_logo.png');
   if (splashFile.existsSync()) {
     splashFile.deleteSync();
@@ -25,7 +25,7 @@ Future<void> downloadSplash(String splashUrl) async {
 }
 
 Future<void> downloadIcon(String iconUrl) async {
-  final iconResponse = await get(iconUrl);
+  final iconResponse = await get(Uri.parse(iconUrl));
   final iconFile = File('assets/images/discy_app_icon.png');
   if (iconFile.existsSync()) {
     iconFile.deleteSync();
@@ -35,7 +35,7 @@ Future<void> downloadIcon(String iconUrl) async {
 }
 
 Future<void> downloadNotiIcon(String notiIconUrl) async {
-  final iconResponse = await get(notiIconUrl);
+  final iconResponse = await get(Uri.parse(notiIconUrl));
   final iconFile = File('android/app/src/main/res/drawable/noti_icon.png');
   if (iconFile.existsSync()) {
     iconFile.deleteSync();
