@@ -37,6 +37,9 @@ Future<void> infoPlist({
   } else {
     dict()?.children.removeAt(
         dict()?.children.indexOf(gADApplicationIdentifierKey) ?? 0 + 1);
+    final int index =
+        dict()?.children.indexOf(gADApplicationIdentifierKey) ?? 0 + 1;
+    print(">>>>> $index");
     dict()?.children[dict()?.children.indexOf(gADApplicationIdentifierKey) ??
         0 + 1] = gADApplicationIdentifierElement;
   }
