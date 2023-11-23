@@ -177,7 +177,7 @@ Future<void> androidManifest({
             </intent-filter>
             ''' : ''}
             <!-- App Links -->
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
