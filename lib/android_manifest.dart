@@ -176,8 +176,8 @@ Future<void> androidManifest({
                     />
             </intent-filter>
             ''' : ''}
-            <!-- App Links -->
-            <intent-filter android:autoVerify="true">
+            <!-- Web Links -->
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -187,6 +187,15 @@ Future<void> androidManifest({
                     android:scheme="https"
                     android:host="$appLinkHost"$applinkPathPatternElement
                     />
+            </intent-filter>
+            <!-- App Links -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="$appLinkHost"$applinkPathPatternElement />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
