@@ -73,7 +73,7 @@ dependencies:
   dio: ^5.3.0
   page_transition: ^2.0.9
   flutter_staggered_grid_view: ^0.4.0
-  flash: ^3.1.0
+  flash: ^3.0.5+2
   flutter_share: ^2.0.0
   in_app_review: ^2.0.6
   flare_flutter: ^3.0.2
