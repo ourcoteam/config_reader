@@ -5,9 +5,7 @@ Future<void> changePubspec({
   bool? remoteConfigReaderDep,
 }) async {
   final file = File('pubspec.yaml');
-  final lastAndroidVersionString = file
-      .readAsLinesSync()
-      .firstWhere((element) => element.contains('version:'));
+  final lastAndroidVersionString = file.readAsLinesSync().firstWhere((element) => element.contains('version:'));
   file.writeAsStringSync('''
 name: news
 description: A new Flutter project.
@@ -75,7 +73,7 @@ dependencies:
   dio: ^5.3.0
   page_transition: ^2.0.9
   flutter_staggered_grid_view: ^0.4.0
-  flash: ^2.0.2
+  flash: ^3.1.0
   flutter_share: ^2.0.0
   in_app_review: ^2.0.6
   flare_flutter: ^3.0.2
