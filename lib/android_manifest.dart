@@ -22,8 +22,7 @@ Future<void> androidManifest({
 
   final notiFile = File('android/app/src/main/res/drawable/noti_icon.png');
   final colorsFile = File('android/app/src/main/res/values/colors.xml');
-  if (notiFile.existsSync() &&
-      colorsFile.readAsStringSync().contains('noti_color')) {
+  if (notiFile.existsSync() && colorsFile.readAsStringSync().contains('noti_color')) {
     notiIcon = '''
 <meta-data
           android:name="com.google.firebase.messaging.default_notification_icon"
@@ -37,10 +36,7 @@ Future<void> androidManifest({
 
   final xml = XmlDocument.parse(file.readAsStringSync());
   final man = xml.rootElement;
-  final oldBundle = man.attributes
-          .firstWhereOrNull((e) => e.name.local == 'package')
-          ?.value ??
-      'null';
+  final oldBundle = man.attributes.firstWhereOrNull((e) => e.name.local == 'package')?.value ?? 'null';
   final app = man.getElement('application');
   final oldName = app?.attributes
           .firstWhereOrNull(
@@ -58,12 +54,10 @@ Future<void> androidManifest({
   final appLinkHost = Uri.parse(applink ?? "").host;
   final appLinkPathPattern = Uri.parse(applink ?? "").path;
 
-  final applinkPathPatternElement = appLinkPathPattern != null &&
-          appLinkPathPattern.isNotEmpty
+  final applinkPathPatternElement = appLinkPathPattern != null && appLinkPathPattern.isNotEmpty
       ? '\n\t\t\t\t\tandroid:pathPattern="${appLinkPathPattern.startsWith('/') ? '' : '/'}$appLinkPathPattern"'
       : '';
-  final deeplinkPathPatternElement = deepLinkPathPattern != null &&
-          deepLinkPathPattern.isNotEmpty
+  final deeplinkPathPatternElement = deepLinkPathPattern != null && deepLinkPathPattern.isNotEmpty
       ? '\n\t\t\t\t\tandroid:pathPattern="${deepLinkPathPattern.startsWith('/') ? '' : '/'}$deepLinkPathPattern"'
       : '';
 
@@ -99,6 +93,10 @@ Future<void> androidManifest({
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" android:host="youtube.com" />
         </intent>
+    </queries>
+
+    <queries>
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
 
     <application
