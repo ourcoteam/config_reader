@@ -237,7 +237,7 @@ Future<void> androidManifest({
             android:value="@string/facebook_app_id"
             />
         <meta-data android:name="com.facebook.sdk.ClientToken"
-          android:value="@string/facebook_client_token" /
+            android:value="@string/facebook_client_token" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
