@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:config_reader/utils/utils.dart';
 import 'package:xml/xml.dart';
 
-Future<void> parseFacebook({String? facebookName, String? facebookId}) async {
+Future<void> parseFacebook(
+    {required String? facebookName, required String? facebookId, required String? facebookClientToken}) async {
   final path = 'android/app/src/main/res/values';
 
   final file = File('$path/strings.xml');
@@ -25,6 +26,12 @@ Future<void> parseFacebook({String? facebookName, String? facebookId}) async {
       'name': 'facebook_app_id',
     }, nest: () {
       builder.text(facebookId ?? 'FACEBOOK_ID');
+    });
+
+    builder.element('string', attributes: {
+      'name': 'facebook_client_token',
+    }, nest: () {
+      builder.text(facebookClientToken ?? 'facebookClientToken');
     });
 
     builder.element('string', attributes: {
