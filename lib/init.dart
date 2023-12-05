@@ -20,6 +20,7 @@ import 'flutter_native_splash.dart';
 import 'git_ignore.dart';
 import 'google_services_plist.dart';
 import 'http_handler.dart';
+import 'icons/ios.dart';
 import 'info_plist.dart';
 import 'ios_bundle_id_file.dart';
 import 'ios_capabilities_file.dart';
@@ -153,6 +154,7 @@ Future<void> init({
   await flutterLauncherIcons();
   await flutterLauncherName(appName);
   await flutterNativeSplash(splashColor);
+  await changeIOSPackageName(appBundleIOS);
 
   final clean = 'flutter clean';
   final pubGet = 'flutter pub get';
