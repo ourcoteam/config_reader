@@ -64,6 +64,7 @@ android {
         applicationId "$bundle"
         minSdkVersion 22
         targetSdkVersion 34
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -91,6 +92,7 @@ flutter {
 }
 
 dependencies {
+    implementation "androidx.multidex:multidex:2.0.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:\$kotlin_version"
 
 }
