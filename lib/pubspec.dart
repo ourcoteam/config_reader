@@ -49,7 +49,6 @@ dependencies:
   http: ^0.13.5
   # flutter_fawry_pay: ^0.0.6+1
   youtube_player_flutter: ^8.1.2
-  flutter_youtube_view: ^2.0.4
   font_awesome_flutter: ^10.5.0
   country_pickers: ^2.0.0
   flutter_multi_formatter: ^2.11.5
