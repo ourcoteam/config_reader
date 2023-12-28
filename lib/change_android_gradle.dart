@@ -7,7 +7,7 @@ Future<void> changeAndroidGradle() async {
   }
   file.writeAsStringSync('''
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.0'
     repositories {
         google()
         jcenter()
