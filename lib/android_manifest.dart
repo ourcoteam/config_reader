@@ -159,7 +159,7 @@ Future<void> androidManifest({
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="$oldBundle"
+                    android:scheme="$bundle"
                     />
             </intent-filter>
             ${deeplink != null ? '''
