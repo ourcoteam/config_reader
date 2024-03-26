@@ -131,6 +131,7 @@ dependencies:
   
 dependency_overrides:
   flutter_svg: ^2.0.7
+  recaptcha_enterprise_flutter: ^18.4.2
 
 dev_dependencies:
   flutter_test:
