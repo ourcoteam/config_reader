@@ -62,7 +62,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "$bundle"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 34
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
