@@ -48,6 +48,15 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+subprojects {
+  afterEvaluate { project ->
+    if (project.hasProperty("android")) {
+      project.android.compileSdkVersion = 34
+      project.android.defaultConfig.targetSdkVersion = 34
+    }
+  }
+}
+
 android {
     compileSdkVersion 34
 
