@@ -21,6 +21,15 @@ classpath 'com.android.tools.build:gradle:7.3.1'
     }
 }
 
+subprojects {
+  afterEvaluate { project ->
+    if (project.hasProperty("android")) {
+      project.android.compileSdkVersion = 34
+      project.android.defaultConfig.targetSdkVersion = 34
+    }
+  }
+}
+
 allprojects {
     repositories {
         google()
