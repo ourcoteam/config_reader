@@ -104,7 +104,7 @@ dependencies:
   dotted_line: ^3.2.2
   drop_cap_text: ^1.1.3
   sign_in_with_apple: ^5.0.0
-  firebase_auth: ^5.3.1
+  firebase_auth: ^5.5.2
   firebase_core: ^3.6.0
 #  firebase_auth_oauth: ^0.2.0
   twitter_login: ^4.0.0
@@ -132,7 +132,7 @@ dependencies:
   
 dependency_overrides:
   flutter_svg: ^2.0.7
-  recaptcha_enterprise_flutter: 18.4.2
+  recaptcha_enterprise_flutter: ^18.7.0
 
 dev_dependencies:
   flutter_test:
