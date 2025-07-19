@@ -70,7 +70,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "ru.how2install.app"
+        applicationId "$bundle"
         minSdkVersion 23
         targetSdkVersion 35
         multiDexEnabled true
