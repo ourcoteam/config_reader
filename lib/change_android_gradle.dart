@@ -24,8 +24,21 @@ classpath 'com.android.tools.build:gradle:7.3.1'
 subprojects {
   afterEvaluate { project ->
     if (project.hasProperty("android")) {
-      project.android.compileSdkVersion = 34
-      project.android.defaultConfig.targetSdkVersion = 34
+      project.android.compileSdkVersion = 35
+      project.android.defaultConfig.targetSdkVersion = 35
+      
+      // Set Java compatibility
+      project.android.compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+      }
+      
+      // Set Kotlin JVM target
+      project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+          jvmTarget = '11'
+        }
+      }
     }
   }
 }
