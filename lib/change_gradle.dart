@@ -49,10 +49,19 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
     }
 
     lintOptions {
@@ -63,7 +72,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "$bundle"
         minSdkVersion 23
-        targetSdkVersion 34
+        targetSdkVersion 35
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
