@@ -15,7 +15,7 @@ description: A new Flutter project.
 ${version != null ? "version: $version" : lastAndroidVersionString}
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
   flutter:
@@ -36,7 +36,8 @@ dependencies:
   # flutter_advanced_networkimage_2: ^2.0.1
   bloc: ^7.0.0
   flutter_bloc: ^7.2.0
-  assets_audio_player: ^3.1.1
+  # assets_audio_player: ^3.1.1
+  just_audio: ^0.9.36
   dartz: ^0.10.1
   freezed_annotation: ^2.4.1
   flutter_funding_choices: ^1.1.0
@@ -56,8 +57,8 @@ dependencies:
   firebase_crashlytics: ^4.1.3
   cached_network_image: ^3.2.3
   mailer: ^6.2.0
-  package_info_plus: ^4.1.0
-  device_info_plus: ^9.0.3
+  package_info_plus: ^8.0.0
+  device_info_plus: ^11.0.0
   shimmer: ^3.0.0
   http_interceptor: ^2.0.0
   share: ^2.0.4
@@ -75,7 +76,6 @@ dependencies:
   flash: ^3.0.5+2
   flutter_share: ^2.0.0
 #  in_app_review: ^2.0.6
-  flare_flutter: ^3.0.2
   implicitly_animated_reorderable_list_2: ^0.6.0
   html: ^0.15.4
   connectivity: ^3.0.6
@@ -88,7 +88,7 @@ dependencies:
   extended_sliver: ^2.1.3
   carousel_slider: ^5.0.0
   animated_size_and_fade: ^4.0.0
-  flutter_sticky_header: ^0.6.5
+  flutter_sticky_header: ^0.7.0
   flutter_hooks: ^0.20.0
   google_fonts: ^4.0.0
   launch_app_store: ^1.0.2
@@ -118,7 +118,7 @@ dependencies:
   flutter_app_badger: ^1.5.0
   app_tracking_transparency: ^2.0.4
   google_mobile_ads: ^5.2.0
-  flutter_math_fork: ^0.7.1
+  flutter_math_fork: 0.7.3
   mailto: ^2.0.0
   # flutter_inappwebview: ^6.1.5
   # flutter_inappwebview: ^5.7.2+3
@@ -145,13 +145,10 @@ dev_dependencies:
   rename: ^2.1.1
   change_app_package_name: ^1.1.0
   lints: ^2.1.1
-  ${remoteConfigReaderDep == true ? '''
-config_reader:
+  config_reader:
     git:
       url: https://github.com/ourcoteam/config_reader
-      ref: config_reader_nullsafety_3.24.0''' : '''
-config_reader:
-    path: C:/Users/user/StudioProjects/config_reader'''}
+      ref: config_reader_nullsafety_3.24.0
   custom_flutter_launcher_name:
     git:
       url: https://github.com/ourcoteam/custom_flutter_launcher_name
