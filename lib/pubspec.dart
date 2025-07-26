@@ -145,10 +145,15 @@ dev_dependencies:
   rename: ^2.1.1
   change_app_package_name: ^1.1.0
   lints: ^2.1.1
+
+  ${remoteConfigReaderDep == true ? '''
   config_reader:
     git:
       url: https://github.com/ourcoteam/config_reader
-      ref: config_reader_nullsafety_3.24.0
+      ref: config_reader_nullsafety_3.24.0''' : '''
+config_reader:
+    path: C:/Users/user/StudioProjects/config_reader'''}
+      
   custom_flutter_launcher_name:
     git:
       url: https://github.com/ourcoteam/custom_flutter_launcher_name
