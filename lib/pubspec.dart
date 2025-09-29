@@ -74,7 +74,7 @@ dependencies:
   http_interceptor: ^2.0.0
   share: ^2.0.4
   firebase_messaging: ^15.1.3
-  flutter_svg: ^2.0.7
+  flutter_svg: 2.0.2
   store_redirect: ^2.0.2
   flutter_i18n: ^0.36.0
   path_provider: ^2.0.15
@@ -133,7 +133,6 @@ dependencies:
   visibility_detector: ^0.4.0+2
 
 dependency_overrides:
-  flutter_svg: ^2.0.7
   recaptcha_enterprise_flutter: ^18.7.0
 
 dev_dependencies:
