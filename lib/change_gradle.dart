@@ -57,6 +57,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
@@ -105,7 +106,7 @@ dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:\$kotlin_version"
     implementation 'com.google.android.play:review:2.0.1'
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.3'
 }
 ''');
 }
